@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://doedub0leiid0"]
+
+[ext_resource type="Script" path="res://christopher_test.gd" id="1_k6lsp"]
+
+[node name="minimap" type="ColorRect"]
+custom_minimum_size = Vector2(512, 512)
+offset_right = 512.0
+offset_bottom = 512.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_k6lsp")
