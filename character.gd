@@ -5,6 +5,7 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const LERP_VAL = .125
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -15,23 +16,28 @@ func _enter_tree():
 func _ready():
 	if not is_multiplayer_authority(): return
 
-	# Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	visible = false
 	camera.current = true
 	pass
 
+func _notification(what):
+	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED	
+
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 
-	if event is InputEventMouseMotion:
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * .005)
 		camera.rotate_x(-event.relative.y * .005)
 		camera.rotation.x = clamp(-PI/2, camera.rotation.x, PI/2)
 
 func _process(_delta):
-	print("process called on ", multiplayer.get_unique_id(), " for ", name)
-	print("setting it to ", velocity.length() / SPEED)
-	animation_tree.set("parameters/speed/blend_amount", velocity.length() / SPEED)
+	var local_velocity = transform.inverse().basis * velocity
+	animation_tree.set("parameters/run/blend_position", Vector2(local_velocity.x, local_velocity.z) / SPEED)
+	if Input.is_action_just_pressed("pause"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -49,10 +55,10 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = lerp(velocity.x, direction.x * SPEED, LERP_VAL)
+		velocity.z = lerp(velocity.z, direction.z * SPEED, LERP_VAL)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
+		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
 
 	move_and_slide()
