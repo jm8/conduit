@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwwjqaqsllu44"]
+[gd_scene load_steps=3 format=3 uid="uid://dwwjqaqsllu44"]
 
 [ext_resource type="Script" path="res://minimap.gd" id="1_onxul"]
+[ext_resource type="Texture2D" uid="uid://16uopcp8nqb5" path="res://assets/player.png" id="2_3rray"]
 
 [node name="Minimap" type="AspectRatioContainer"]
 custom_minimum_size = Vector2(512, 512)
@@ -11,3 +12,8 @@ script = ExtResource("1_onxul")
 [node name="background" type="ColorRect" parent="."]
 layout_mode = 2
 color = Color(0.211765, 0.329412, 0.439216, 1)
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(89, 51)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_3rray")

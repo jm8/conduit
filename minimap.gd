@@ -9,7 +9,7 @@ var map_aabb: AABB;
 
 var conduit_sprites: Array[Sprite2D];
 var ally_sprites: Array[Sprite2D];
-
+@onready var player_sprite = $PlayerSprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,3 +53,10 @@ func _process(delta):
 			conduit_sprite.visible = true
 		conduit_sprite.position = Vector2(normalized_position.x * $background.size.x, 
 		normalized_position.y * $background.size.y) + $background.position
+	
+	var pos = Globulars.character.position
+	var normalized_position: Vector2 = Vector2((pos.x - map_aabb.position.x) / map_aabb.size.x,
+		(pos.z - map_aabb.position.z) / map_aabb.size.z)
+	player_sprite.position = Vector2(normalized_position.x * $background.size.x, 
+		normalized_position.y * $background.size.y) + $background.position
+	player_sprite.rotation = atan2(Globulars.character.rotation.x, Globulars.character.rotation.z)
