@@ -15,7 +15,7 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(-PI/2, camera.rotation.x, PI/2)
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	visible = false
 
 func _physics_process(delta):

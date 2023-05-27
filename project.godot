@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="conduit"
-run/main_scene="res://app.tscn"
+run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
+
+[autoload]
+
+Globulars="*res://globulars.gd"
 
 [input]
 
