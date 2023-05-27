@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://djp8gfnlvw6vo"]
+[gd_scene load_steps=2 format=3 uid="uid://cr0ptboxqaowm"]
 
 [sub_resource type="GDScript" id="GDScript_e3wrp"]
 script/source = "extends Control
@@ -58,10 +58,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -184.0
-offset_top = -108.0
-offset_right = 184.0
-offset_bottom = 108.0
+offset_left = -241.0
+offset_top = -193.0
+offset_right = 241.0
+offset_bottom = 193.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -97,6 +97,10 @@ text = "Join"
 [node name="AddressEdit" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Address"
+
+[node name="PortEdit" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Port"
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

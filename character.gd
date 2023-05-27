@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Character extends CharacterBody3D
 
 @onready var camera = $Armature/Skeleton3D/Camera_2/Camera_2
 @onready var animation_tree = $AnimationTree
@@ -12,6 +12,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
+	if is_multiplayer_authority():
+		Globulars.character = self
 
 func _ready():
 	if not is_multiplayer_authority(): return
