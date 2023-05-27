@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwwjqaqsllu44"]
+
+[ext_resource type="Script" path="res://minimap.gd" id="1_onxul"]
+
+[node name="Minimap" type="AspectRatioContainer"]
+custom_minimum_size = Vector2(512, 512)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_onxul")
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.211765, 0.329412, 0.439216, 1)
