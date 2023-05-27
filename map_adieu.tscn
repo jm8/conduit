@@ -1,0 +1,152 @@
+[gd_scene load_steps=23 format=3 uid="uid://i4sjq8ia8n1r"]
+
+[ext_resource type="PackedScene" uid="uid://bao2m7gaurxyn" path="res://assets/buildings/building1.glb" id="1_vlaf4"]
+[ext_resource type="PackedScene" uid="uid://bq3fmb35fwikl" path="res://assets/buildings/building2.glb" id="2_fy18j"]
+[ext_resource type="PackedScene" uid="uid://bialmm7gfx2mb" path="res://character.tscn" id="3_l73xr"]
+[ext_resource type="PackedScene" uid="uid://c10wp52tcogrw" path="res://assets/buildings/building3.glb" id="4_kn6kb"]
+[ext_resource type="PackedScene" uid="uid://cjgk2yvwl37gk" path="res://assets/buildings/building4.glb" id="5_cqmj1"]
+[ext_resource type="PackedScene" uid="uid://jfs101ey2x7i" path="res://assets/buildings/building5.glb" id="6_1j0n4"]
+[ext_resource type="PackedScene" uid="uid://c0276mbbgitka" path="res://assets/buildings/building6.glb" id="7_2867m"]
+[ext_resource type="PackedScene" uid="uid://goekni1rbckj" path="res://assets/buildings/tall-tower1.glb" id="8_oavis"]
+[ext_resource type="PackedScene" uid="uid://tafx20iy4yaf" path="res://assets/buildings/small-tower.glb" id="9_q8hym"]
+[ext_resource type="PackedScene" uid="uid://cvcb8oia4jd5k" path="res://assets/buildings/tall-arch.glb" id="10_4xljs"]
+[ext_resource type="PackedScene" uid="uid://byswxvujmkvl6" path="res://assets/buildings/building-l.glb" id="11_iknp7"]
+[ext_resource type="PackedScene" uid="uid://dcbi0xjlraavc" path="res://assets/buildings/building-l4.glb" id="12_vowkf"]
+[ext_resource type="PackedScene" uid="uid://ckw7v54t8x4xj" path="res://assets/buildings/building-garage.glb" id="13_m5prd"]
+[ext_resource type="Texture2D" uid="uid://cjc8ithy0yirs" path="res://assets/nightskycolor.png" id="14_uhv8x"]
+[ext_resource type="PackedScene" uid="uid://dvhgptv3qkpjf" path="res://assets/buildings/barrier-sides.glb" id="15_shank"]
+[ext_resource type="PackedScene" uid="uid://cpiaycqnse7vv" path="res://assets/buildings/building9.glb" id="16_r63nc"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qkb1x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcrbu"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 16.0
+clearcoat_enabled = true
+clearcoat_roughness = 1.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_lxq8b"]
+material = SubResource("StandardMaterial3D_pcrbu")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b61xk"]
+panorama = ExtResource("14_uhv8x")
+
+[sub_resource type="Sky" id="Sky_0q1ol"]
+sky_material = SubResource("PanoramaSkyMaterial_b61xk")
+
+[sub_resource type="Environment" id="Environment_uxmth"]
+background_mode = 2
+background_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_0q1ol")
+ambient_light_source = 2
+ambient_light_color = Color(0.811765, 1, 1, 1)
+ambient_light_energy = 16.0
+ssao_enabled = true
+sdfgi_enabled = true
+sdfgi_cascades = 8
+sdfgi_min_cell_size = 0.1
+sdfgi_y_scale = 2
+sdfgi_energy = 0.1
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 1.0
+glow_blend_mode = 0
+fog_density = 0.001
+
+[node name="Half Map Adieu" type="Node3D"]
+
+[node name="Base" parent="." instance=ExtResource("1_vlaf4")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 50)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource("PlaneMesh_qkb1x")
+metadata/_edit_lock_ = true
+
+[node name="building2" parent="." instance=ExtResource("2_fy18j")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.96078, -4.97178, 24.2304)
+
+[node name="Character" parent="." instance=ExtResource("3_l73xr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2847, 0, 35.9414)
+
+[node name="building3" parent="." instance=ExtResource("4_kn6kb")]
+transform = Transform3D(1.1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0893, -0.662644, 47.8308)
+
+[node name="building4" parent="." instance=ExtResource("5_cqmj1")]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 31.66, 0, 18.409)
+
+[node name="building5" parent="building4" instance=ExtResource("5_cqmj1")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.97678, 0, -21.4964)
+
+[node name="building5" parent="." instance=ExtResource("6_1j0n4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9648, -19.8318, 10.4883)
+
+[node name="conduit" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.129, 1, 24.57)
+mesh = SubResource("TorusMesh_lxq8b")
+
+[node name="conduit3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.1867, 1, 16.561)
+mesh = SubResource("TorusMesh_lxq8b")
+
+[node name="conduit4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.9659, 1, -22.7321)
+mesh = SubResource("TorusMesh_lxq8b")
+
+[node name="building6" parent="." instance=ExtResource("7_2867m")]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 37.5078, 0.406543, -13.974)
+
+[node name="tall-tower1" parent="." instance=ExtResource("8_oavis")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 23.0112, 0, 19.2727)
+
+[node name="small-tower" parent="." instance=ExtResource("9_q8hym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2457, -8.61589, -8.76174)
+
+[node name="tall-arch" parent="." instance=ExtResource("10_4xljs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 42.2103, 0, 36.969)
+
+[node name="building-l" parent="." instance=ExtResource("11_iknp7")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 59.1034, -1.41361, 4.694)
+
+[node name="building-l4" parent="." instance=ExtResource("12_vowkf")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 81.6918, -0.552166, 22.3835)
+
+[node name="building-garage" parent="." instance=ExtResource("13_m5prd")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 90.2759, 0, -14.7074)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uxmth")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 18.4555, 0)
+light_energy = 0.2
+light_angular_distance = 1.0
+shadow_enabled = true
+
+[node name="barrier-sides" parent="." instance=ExtResource("15_shank")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08651, 0, 4.42033)
+
+[node name="conduit2" type="MeshInstance3D" parent="barrier-sides"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("TorusMesh_lxq8b")
+skeleton = NodePath("../..")
+
+[node name="barrier-sides2" parent="barrier-sides" instance=ExtResource("15_shank")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="building9" parent="." instance=ExtResource("16_r63nc")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.9768, 0, 32.7272)
+
+[node name="building7" parent="building9" instance=ExtResource("6_1j0n4")]
+transform = Transform3D(-7.86805e-08, 0, -1.8, 0, 1.8, 0, 1.8, 0, -7.86805e-08, 1.06587, -9.60089, -34.6697)
+
+[node name="small-tower2" parent="." instance=ExtResource("9_q8hym")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 29.3413, -2.38419e-07, 44.6963)
+
+[node name="building7" parent="." instance=ExtResource("4_kn6kb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48062, 0, -25.9495)
+
+[node name="building8" parent="building7" instance=ExtResource("4_kn6kb")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -25.483, 0, 5.425)
