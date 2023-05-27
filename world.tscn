@@ -1,11 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxdc5xrxfbvhl"]
 
-<<<<<<< Updated upstream
-[ext_resource type="PackedScene" uid="uid://dwwjqaqsllu44" path="res://minimap.tscn" id="1_f08lf"]
-=======
 [ext_resource type="PackedScene" uid="uid://doedub0leiid0" path="res://christopher_test.tscn" id="1_ekgtl"]
 [ext_resource type="Script" path="res://ally 1.gd" id="2_02nuo"]
->>>>>>> Stashed changes
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_w7c6n"]
 size = Vector2(20, 20)
@@ -87,9 +83,6 @@ spawn_path = NodePath("..")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-<<<<<<< Updated upstream
-[node name="Minimap" parent="HUD" instance=ExtResource("1_f08lf")]
-=======
 [node name="MarginContainer" parent="HUD" node_paths=PackedStringArray("map") instance=ExtResource("1_ekgtl")]
 map = NodePath("../../MeshInstance3D")
 
@@ -102,7 +95,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.214411, 6.93011, 7.73432)
 [node name="ally 1" type="Marker3D" parent="." groups=["allies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19846, 6.93012, 0.630862)
 script = ExtResource("2_02nuo")
->>>>>>> Stashed changes
 
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
