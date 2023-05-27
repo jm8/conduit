@@ -19,6 +19,7 @@ func _enter_tree():
 		Globulars.character = self
 
 func _ready():
+	animation_tree.active = true
 	if not is_multiplayer_authority(): return
 	
 	gun1st.visible = true
