@@ -1,0 +1,88 @@
+[gd_scene load_steps=22 format=3 uid="uid://dyaf86n8lnksk"]
+
+[ext_resource type="PackedScene" uid="uid://tafx20iy4yaf" path="res://assets/buildings/small-tower.glb" id="1_n3ae6"]
+[ext_resource type="PackedScene" uid="uid://bao2m7gaurxyn" path="res://assets/buildings/building1.glb" id="2_8km5x"]
+[ext_resource type="PackedScene" uid="uid://bq3fmb35fwikl" path="res://assets/buildings/building2.glb" id="3_7lqyi"]
+[ext_resource type="PackedScene" uid="uid://c10wp52tcogrw" path="res://assets/buildings/building3.glb" id="4_h5hdl"]
+[ext_resource type="PackedScene" uid="uid://byswxvujmkvl6" path="res://assets/buildings/building-l.glb" id="5_4n7pp"]
+[ext_resource type="PackedScene" uid="uid://bsqgjfw0l1od" path="res://assets/buildings/building-arch.glb" id="6_dqcby"]
+[ext_resource type="PackedScene" uid="uid://cjgk2yvwl37gk" path="res://assets/buildings/building4.glb" id="7_sxntn"]
+[ext_resource type="PackedScene" uid="uid://dfcrqj4ka661p" path="res://assets/buildings/building-l2.glb" id="8_8oob6"]
+[ext_resource type="PackedScene" uid="uid://ckw7v54t8x4xj" path="res://assets/buildings/building-garage.glb" id="9_55lji"]
+[ext_resource type="PackedScene" uid="uid://bprvw0c7kt3s" path="res://assets/buildings/garage-door.glb" id="10_wjkd4"]
+[ext_resource type="PackedScene" uid="uid://bd42w6yc8oiht" path="res://assets/buildings/building-l3.glb" id="11_bhxeg"]
+[ext_resource type="PackedScene" uid="uid://dcbi0xjlraavc" path="res://assets/buildings/building-l4.glb" id="12_wai5c"]
+[ext_resource type="PackedScene" uid="uid://jfs101ey2x7i" path="res://assets/buildings/building5.glb" id="13_pjwsy"]
+[ext_resource type="PackedScene" uid="uid://c0276mbbgitka" path="res://assets/buildings/building6.glb" id="14_1ej4m"]
+[ext_resource type="PackedScene" uid="uid://dlysdtv2wnqdx" path="res://assets/buildings/building7.glb" id="15_wdppm"]
+[ext_resource type="PackedScene" uid="uid://cvcb8oia4jd5k" path="res://assets/buildings/tall-arch.glb" id="16_p23lf"]
+[ext_resource type="PackedScene" uid="uid://da7a22wmsmdfm" path="res://assets/buildings/building8.glb" id="17_affq0"]
+[ext_resource type="PackedScene" uid="uid://goekni1rbckj" path="res://assets/buildings/tall-tower1.glb" id="18_xfhtn"]
+[ext_resource type="PackedScene" uid="uid://d2qm3lcoyq3at" path="res://assets/buildings/tall-tower2.glb" id="19_08848"]
+[ext_resource type="PackedScene" uid="uid://dvhgptv3qkpjf" path="res://assets/buildings/barrier-sides.glb" id="20_ne77e"]
+[ext_resource type="PackedScene" uid="uid://cpiaycqnse7vv" path="res://assets/buildings/building9.glb" id="21_n5was"]
+
+[node name="Buildings" type="Node3D"]
+
+[node name="small-tower" parent="." instance=ExtResource("1_n3ae6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.9611, 0, -6.39086)
+
+[node name="building1" parent="." instance=ExtResource("2_8km5x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.5639, -3.8147e-06, 35.8829)
+
+[node name="building2" parent="." instance=ExtResource("3_7lqyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.833, 0, 58.3877)
+
+[node name="building3" parent="." instance=ExtResource("4_h5hdl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7586, 0, 51.72)
+
+[node name="building-l" parent="." instance=ExtResource("5_4n7pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.3886, 0, -45.4129)
+
+[node name="building-arch" parent="." instance=ExtResource("6_dqcby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.69348, -3.8147e-06, -66.1106)
+
+[node name="building4" parent="." instance=ExtResource("7_sxntn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.8239, 0, -70.7023)
+
+[node name="building-l2" parent="." instance=ExtResource("8_8oob6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.2656, 0, -3.68764)
+
+[node name="building-garage" parent="." instance=ExtResource("9_55lji")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.2287, 0, 58.8114)
+
+[node name="garage-door" parent="." instance=ExtResource("10_wjkd4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.258, 0, 56.0611)
+
+[node name="building-l3" parent="." instance=ExtResource("11_bhxeg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.7072, 0, 57.1961)
+
+[node name="building-l4" parent="." instance=ExtResource("12_wai5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.0082, -7.62939e-06, 98.2872)
+
+[node name="building5" parent="." instance=ExtResource("13_pjwsy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.71, -7.62939e-06, -16.9618)
+
+[node name="building6" parent="." instance=ExtResource("14_1ej4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.1246, 0, 24.5388)
+
+[node name="building7" parent="." instance=ExtResource("15_wdppm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.9778, -7.62939e-06, 108.799)
+
+[node name="tall-arch" parent="." instance=ExtResource("16_p23lf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6461, 0, 138.663)
+
+[node name="building8" parent="." instance=ExtResource("17_affq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5927, 7.62939e-06, 129.295)
+
+[node name="tall-tower1" parent="." instance=ExtResource("18_xfhtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.1519, 0, 13.6854)
+
+[node name="tall-tower2" parent="." instance=ExtResource("19_08848")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.0759, 0, -41.6511)
+
+[node name="barrier-sides" parent="." instance=ExtResource("20_ne77e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.8747, 0, 8.7952)
+
+[node name="building9" parent="." instance=ExtResource("21_n5was")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.4023, 0, -55.7375)
