@@ -52,6 +52,12 @@ func _process(_delta):
 	if not is_multiplayer_authority(): return
 
 	if Input.is_action_pressed("fire"):
+		const MAX_CAM_SHAKE = 0.3
+		camera.transform.origin = lerp(camera.transform.origin, Vector3(
+			randf_range(-MAX_CAM_SHAKE, MAX_CAM_SHAKE),
+			randf_range(-MAX_CAM_SHAKE, MAX_CAM_SHAKE),
+			0),
+		0.5)
 		gun_animation_player.play("fire")
 
 func _physics_process(delta):
