@@ -1,8 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://i4sjq8ia8n1r"]
+[gd_scene load_steps=21 format=3 uid="uid://i4sjq8ia8n1r"]
 
 [ext_resource type="PackedScene" uid="uid://bao2m7gaurxyn" path="res://assets/buildings/building1.glb" id="1_vlaf4"]
 [ext_resource type="PackedScene" uid="uid://bq3fmb35fwikl" path="res://assets/buildings/building2.glb" id="2_fy18j"]
-[ext_resource type="PackedScene" uid="uid://bialmm7gfx2mb" path="res://character.tscn" id="3_l73xr"]
 [ext_resource type="PackedScene" uid="uid://c10wp52tcogrw" path="res://assets/buildings/building3.glb" id="4_kn6kb"]
 [ext_resource type="PackedScene" uid="uid://cjgk2yvwl37gk" path="res://assets/buildings/building4.glb" id="5_cqmj1"]
 [ext_resource type="PackedScene" uid="uid://jfs101ey2x7i" path="res://assets/buildings/building5.glb" id="6_1j0n4"]
@@ -13,13 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://byswxvujmkvl6" path="res://assets/buildings/building-l.glb" id="11_iknp7"]
 [ext_resource type="PackedScene" uid="uid://dcbi0xjlraavc" path="res://assets/buildings/building-l4.glb" id="12_vowkf"]
 [ext_resource type="PackedScene" uid="uid://ckw7v54t8x4xj" path="res://assets/buildings/building-garage.glb" id="13_m5prd"]
-[ext_resource type="Texture2D" uid="uid://cjc8ithy0yirs" path="res://assets/nightskycolor.png" id="14_uhv8x"]
 [ext_resource type="PackedScene" uid="uid://dvhgptv3qkpjf" path="res://assets/buildings/barrier-sides.glb" id="15_shank"]
 [ext_resource type="PackedScene" uid="uid://cpiaycqnse7vv" path="res://assets/buildings/building9.glb" id="16_r63nc"]
+[ext_resource type="PackedScene" uid="uid://bd42w6yc8oiht" path="res://assets/buildings/building-l3.glb" id="17_br6g5"]
+[ext_resource type="PackedScene" uid="uid://d2qm3lcoyq3at" path="res://assets/buildings/tall-tower2.glb" id="18_gyoyv"]
+[ext_resource type="PackedScene" uid="uid://bsqgjfw0l1od" path="res://assets/buildings/building-arch.glb" id="19_objja"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qkb1x"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcrbu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x37tk"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
 emission_enabled = true
 emission = Color(0, 1, 1, 1)
@@ -28,32 +29,7 @@ clearcoat_enabled = true
 clearcoat_roughness = 1.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_lxq8b"]
-material = SubResource("StandardMaterial3D_pcrbu")
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b61xk"]
-panorama = ExtResource("14_uhv8x")
-
-[sub_resource type="Sky" id="Sky_0q1ol"]
-sky_material = SubResource("PanoramaSkyMaterial_b61xk")
-
-[sub_resource type="Environment" id="Environment_uxmth"]
-background_mode = 2
-background_color = Color(1, 1, 1, 1)
-sky = SubResource("Sky_0q1ol")
-ambient_light_source = 2
-ambient_light_color = Color(0.811765, 1, 1, 1)
-ambient_light_energy = 16.0
-ssao_enabled = true
-sdfgi_enabled = true
-sdfgi_cascades = 8
-sdfgi_min_cell_size = 0.1
-sdfgi_y_scale = 2
-sdfgi_energy = 0.1
-glow_enabled = true
-glow_normalized = true
-glow_bloom = 1.0
-glow_blend_mode = 0
-fog_density = 0.001
+material = SubResource("StandardMaterial3D_x37tk")
 
 [node name="Half Map Adieu" type="Node3D"]
 
@@ -67,9 +43,6 @@ metadata/_edit_lock_ = true
 
 [node name="building2" parent="." instance=ExtResource("2_fy18j")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.96078, -4.97178, 24.2304)
-
-[node name="Character" parent="." instance=ExtResource("3_l73xr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2847, 0, 35.9414)
 
 [node name="building3" parent="." instance=ExtResource("4_kn6kb")]
 transform = Transform3D(1.1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0893, -0.662644, 47.8308)
@@ -88,7 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.129, 1, 24.57)
 mesh = SubResource("TorusMesh_lxq8b")
 
 [node name="conduit3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.1867, 1, 16.561)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.8031, 1, 18.9201)
 mesh = SubResource("TorusMesh_lxq8b")
 
 [node name="conduit4" type="MeshInstance3D" parent="."]
@@ -114,16 +87,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 59.1034, -1.41361, 4.69
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 81.6918, -0.552166, 22.3835)
 
 [node name="building-garage" parent="." instance=ExtResource("13_m5prd")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 90.2759, 0, -14.7074)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_uxmth")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 18.4555, 0)
-light_energy = 0.2
-light_angular_distance = 1.0
-shadow_enabled = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 85.8944, -1.86766, -13.954)
 
 [node name="barrier-sides" parent="." instance=ExtResource("15_shank")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08651, 0, 4.42033)
@@ -150,3 +114,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48062, 0, -25.9495)
 
 [node name="building8" parent="building7" instance=ExtResource("4_kn6kb")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -25.483, 0, 5.425)
+
+[node name="building-l3" parent="." instance=ExtResource("17_br6g5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 63.8155, -17.3477, -11.3758)
+
+[node name="building-l5" parent="." instance=ExtResource("17_br6g5")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -18.265, 0, 21.35)
+
+[node name="building8" parent="building-l5" instance=ExtResource("4_kn6kb")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -19.9491, 3.8147e-06, -4.29056)
+
+[node name="building9" parent="building-l5" instance=ExtResource("4_kn6kb")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -19.9491, -2.6799, 5.24461)
+
+[node name="tall-tower2" parent="." instance=ExtResource("18_gyoyv")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -2.17323, 6.337, 52.1415)
+
+[node name="building-arch" parent="." instance=ExtResource("19_objja")]
+transform = Transform3D(0.688355, -6.01779e-08, 0.725374, -8.74228e-08, -1, 0, 0.725374, -6.34142e-08, -0.688355, -62.0482, 10.7747, 36.3101)
+
+[node name="building-arch2" parent="building-arch" instance=ExtResource("19_objja")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, -2.84217e-14, 0, 0, 1, -4.23189, 0, 0.0917511)
+
+[node name="tall-tower3" parent="." instance=ExtResource("18_gyoyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.9653, 0, 17.0946)
+
+[node name="building8" parent="." instance=ExtResource("5_cqmj1")]
+transform = Transform3D(-2.68388e-08, -0.614, 2.68388e-08, 0, -2.68388e-08, -0.614, 0.614, -2.68388e-08, 1.17316e-15, 100.311, 1.41663, -42.2672)
+
+[node name="building-l6" parent="." instance=ExtResource("12_vowkf")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -96.9671, 2.86102e-06, -14.7678)
+
+[node name="building10" parent="." instance=ExtResource("6_1j0n4")]
+transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 26.3948, -2.99567, 3.94084)
+
+[node name="building-l7" parent="." instance=ExtResource("12_vowkf")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -49.6762, -3.67451, -0.158926)
