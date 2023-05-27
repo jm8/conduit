@@ -2,6 +2,10 @@ class_name Character extends CharacterBody3D
 
 @onready var camera = $Armature/Skeleton3D/Camera_2/Camera_2
 @onready var animation_tree = $AnimationTree
+@onready var gun_animation_player = %GunAnimationPlayer
+@onready var body = $Armature/Skeleton3D/Body
+@onready var gun3rd = %Gun3rd
+@onready var gun1st = %Gun1st
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -16,10 +20,14 @@ func _enter_tree():
 		Globulars.character = self
 
 func _ready():
+	animation_tree.active = true
 	if not is_multiplayer_authority(): return
+	
+	gun1st.visible = true
+	body.visible = false
+	gun3rd.visible = false
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	visible = false
 	camera.current = true
 	pass
 
@@ -40,6 +48,17 @@ func _process(_delta):
 	animation_tree.set("parameters/run/blend_position", Vector2(local_velocity.x, local_velocity.z) / SPEED)
 	if Input.is_action_just_pressed("pause"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if not is_multiplayer_authority(): return
+
+	if Input.is_action_pressed("fire"):
+		const MAX_CAM_SHAKE = 0.3
+		camera.transform.origin = lerp(camera.transform.origin, Vector3(
+			randf_range(-MAX_CAM_SHAKE, MAX_CAM_SHAKE),
+			randf_range(-MAX_CAM_SHAKE, MAX_CAM_SHAKE),
+			0),
+		0.5)
+		gun_animation_player.play("fire")
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
