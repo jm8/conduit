@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var camera = $Armature/Skeleton3D/Camera_2/Camera_2
+@onready var animation_tree = $AnimationTree
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -8,17 +9,33 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
+
+func _ready():
+	if not is_multiplayer_authority(): return
+
+	# Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	visible = false
+	camera.current = true
+	pass
+
 func _unhandled_input(event):
+	if not is_multiplayer_authority(): return
+
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * .005)
 		camera.rotate_x(-event.relative.y * .005)
 		camera.rotation.x = clamp(-PI/2, camera.rotation.x, PI/2)
 
-func _ready():
-	# Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	visible = false
+func _process(_delta):
+	print("process called on ", multiplayer.get_unique_id(), " for ", name)
+	print("setting it to ", velocity.length() / SPEED)
+	animation_tree.set("parameters/speed/blend_amount", velocity.length() / SPEED)
 
 func _physics_process(delta):
+	if not is_multiplayer_authority(): return
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta

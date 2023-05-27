@@ -1,0 +1,102 @@
+[gd_scene load_steps=2 format=3 uid="uid://djp8gfnlvw6vo"]
+
+[sub_resource type="GDScript" id="GDScript_e3wrp"]
+script/source = "extends Control
+
+const World = preload(\"res://world.tscn\")
+const Character = preload(\"res://character.tscn\")
+
+@onready var address_entry = $Panel/MarginContainer/VBoxContainer/AddressEdit
+
+const PORT = 9999
+
+func _on_host_button_pressed():
+	var world = World.instantiate()
+	
+	Globulars.enet_peer.create_server(PORT)
+	Globulars.multiplayer.multiplayer_peer = Globulars.enet_peer
+	print(\"Hello\")
+	Globulars.multiplayer.peer_connected.connect(func(peer_id):
+		print(\"Peer connected\")
+		add_player(world, peer_id)
+		
+	)
+	add_player(world, multiplayer.get_unique_id())
+	
+	get_tree().get_root().add_child(world)
+	queue_free()
+
+func _on_join_button_pressed():
+	var world = World.instantiate()
+
+	Globulars.enet_peer.create_client(\"localhost\", PORT)
+	Globulars.multiplayer.multiplayer_peer = Globulars.enet_peer
+
+	Globulars.multiplayer.peer_connected.connect(func(peer_id): add_player(world, peer_id))
+	get_tree().get_root().add_child(world)
+	queue_free()
+
+func add_player(world, peer_id):
+	var character = Character.instantiate()
+	character.name = str(peer_id)
+	world.add_child(character)
+"
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_e3wrp")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -108.0
+offset_right = 184.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Conduit"
+horizontal_alignment = 1
+
+[node name="HostButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="AddressEdit" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Address"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
