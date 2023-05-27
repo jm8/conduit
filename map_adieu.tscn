@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://i4sjq8ia8n1r"]
+[gd_scene load_steps=22 format=3 uid="uid://i4sjq8ia8n1r"]
 
 [ext_resource type="PackedScene" uid="uid://bao2m7gaurxyn" path="res://assets/buildings/building1.glb" id="1_vlaf4"]
 [ext_resource type="PackedScene" uid="uid://bq3fmb35fwikl" path="res://assets/buildings/building2.glb" id="2_fy18j"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cpiaycqnse7vv" path="res://assets/buildings/building9.glb" id="16_r63nc"]
 [ext_resource type="PackedScene" uid="uid://bd42w6yc8oiht" path="res://assets/buildings/building-l3.glb" id="17_br6g5"]
 [ext_resource type="PackedScene" uid="uid://d2qm3lcoyq3at" path="res://assets/buildings/tall-tower2.glb" id="18_gyoyv"]
+[ext_resource type="PackedScene" uid="uid://dfcrqj4ka661p" path="res://assets/buildings/building-l2.glb" id="18_rvu16"]
 [ext_resource type="PackedScene" uid="uid://bsqgjfw0l1od" path="res://assets/buildings/building-arch.glb" id="19_objja"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qkb1x"]
@@ -150,3 +151,15 @@ transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 
 
 [node name="building-l7" parent="." instance=ExtResource("12_vowkf")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -49.6762, -3.67451, -0.158926)
+
+[node name="building1" parent="." instance=ExtResource("1_vlaf4")]
+transform = Transform3D(-2.18557e-08, -0.5, 2.18557e-08, 0, -2.18557e-08, -0.5, 0.5, -2.18557e-08, 9.55343e-16, -39.9261, 7.12084, -24.7967)
+
+[node name="building11" parent="." instance=ExtResource("4_kn6kb")]
+transform = Transform3D(1.09278e-08, 0.25, -3.7749e-08, 0.25, -1.09278e-08, 6.61744e-23, -1.65006e-15, -3.7749e-08, -0.25, -96.8055, 0, -22.5169)
+
+[node name="small-tower3" parent="." instance=ExtResource("9_q8hym")]
+transform = Transform3D(0.25, 0, -2.18557e-08, 0, -0.25, 0, 2.18557e-08, 0, 0.25, -66.7025, 3.99547, -20.9816)
+
+[node name="building-l2" parent="small-tower3" instance=ExtResource("18_rvu16")]
+transform = Transform3D(-0.25, 0, 0, 0, -0.25, 0, 0, 0, -0.25, -0.655823, 0.584204, 0.688522)
