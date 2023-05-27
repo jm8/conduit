@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3k8v1pja1wg2"]
+
+[ext_resource type="PackedScene" uid="uid://d0qm6lyx4qxaw" path="res://assets/decor/table.glb" id="1_1y6ir"]
+[ext_resource type="Material" uid="uid://voa43nr6pcwf" path="res://assets/decor/decor_metallic.tres" id="2_s13by"]
+
+[node name="table" instance=ExtResource("1_1y6ir")]
+
+[node name="scifiprops" parent="." index="0"]
+material_override = ExtResource("2_s13by")

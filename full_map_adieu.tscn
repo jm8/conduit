@@ -59,7 +59,7 @@ light_angular_distance = 1.0
 shadow_enabled = true
 
 [node name="Character" parent="." instance=ExtResource("3_uuwxa")]
-transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -17.5005, -4.76837e-07, -65.9221)
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -11.6224, -4.76837e-07, -107.061)
 
 [node name="conduit5" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -50)
