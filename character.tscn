@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bialmm7gfx2mb"]
+[gd_scene load_steps=55 format=3 uid="uid://bialmm7gfx2mb"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_a1ebq"]
 [ext_resource type="PackedScene" uid="uid://bllw53ictuofw" path="res://assets/Rifle.blend" id="2_mq4aj"]
@@ -13,6 +13,43 @@ properties/1/sync = true
 properties/2/path = NodePath("../..:velocity")
 properties/2/spawn = true
 properties/2/sync = true
+
+[sub_resource type="Animation" id="Animation_o3v1q"]
+resource_name = "fire"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Gun1st:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.184, -0.258, -0.224231), Vector3(0.184, -0.258, -0.174), Vector3(0.184, -0.258, -0.224231)]
+}
+
+[sub_resource type="Animation" id="Animation_822gb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Gun1st:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.184, -0.258, -0.278)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4vrbc"]
+_data = {
+"RESET": SubResource("Animation_822gb"),
+"fire": SubResource("Animation_o3v1q")
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5tol"]
 resource_name = "ArmorUnder"
@@ -9023,7 +9060,12 @@ target_position = Vector3(0, 0, -100)
 [node name="Gun1st" parent="Armature/Skeleton3D/Camera_2/Camera_2/Hand" instance=ExtResource("2_mq4aj")]
 unique_name_in_owner = true
 transform = Transform3D(-1, 3.7471e-20, -8.74228e-08, -4.39878e-20, 1, 0, 8.74228e-08, 0, -1, 0.184, -0.258, -0.278)
-visible = false
+
+[node name="GunAnimationPlayer" type="AnimationPlayer" parent="Armature/Skeleton3D/Camera_2/Camera_2/Hand"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_4vrbc")
+}
 
 [node name="Body" type="MeshInstance3D" parent="Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_chdtm")

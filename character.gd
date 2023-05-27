@@ -2,6 +2,7 @@ class_name Character extends CharacterBody3D
 
 @onready var camera = $Armature/Skeleton3D/Camera_2/Camera_2
 @onready var animation_tree = $AnimationTree
+@onready var gun_animation_player = %GunAnimationPlayer
 @onready var body = $Armature/Skeleton3D/Body
 @onready var gun3rd = %Gun3rd
 @onready var gun1st = %Gun1st
@@ -47,6 +48,11 @@ func _process(_delta):
 	animation_tree.set("parameters/run/blend_position", Vector2(local_velocity.x, local_velocity.z) / SPEED)
 	if Input.is_action_just_pressed("pause"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if not is_multiplayer_authority(): return
+
+	if Input.is_action_pressed("fire"):
+		gun_animation_player.play("fire")
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
