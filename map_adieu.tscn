@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://i4sjq8ia8n1r"]
+[gd_scene load_steps=24 format=3 uid="uid://i4sjq8ia8n1r"]
 
+[ext_resource type="PackedScene" uid="uid://b5qfw16641iu4" path="res://conduit.tscn" id="1_3kynv"]
 [ext_resource type="PackedScene" uid="uid://bao2m7gaurxyn" path="res://assets/buildings/building1.glb" id="1_vlaf4"]
 [ext_resource type="PackedScene" uid="uid://bq3fmb35fwikl" path="res://assets/buildings/building2.glb" id="2_fy18j"]
 [ext_resource type="PackedScene" uid="uid://c10wp52tcogrw" path="res://assets/buildings/building3.glb" id="4_kn6kb"]
@@ -25,17 +26,6 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qkb1x"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x37tk"]
-albedo_color = Color(0.5, 0.5, 0.5, 1)
-emission_enabled = true
-emission = Color(0, 1, 1, 1)
-emission_energy_multiplier = 16.0
-clearcoat_enabled = true
-clearcoat_roughness = 1.0
-
-[sub_resource type="TorusMesh" id="TorusMesh_lxq8b"]
-material = SubResource("StandardMaterial3D_x37tk")
-
 [node name="Half Map Adieu" type="StaticBody3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -46,25 +36,24 @@ transform = Transform3D(100, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("PlaneMesh_qkb1x")
 metadata/_edit_lock_ = true
 
-[node name="conduit" type="MeshInstance3D" parent="."]
+[node name="conduit 1" parent="." instance=ExtResource("1_3kynv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.129, 1, 24.57)
-mesh = SubResource("TorusMesh_lxq8b")
+skeleton = NodePath("")
 
-[node name="conduit3" type="MeshInstance3D" parent="."]
+[node name="conduit 3" parent="." instance=ExtResource("1_3kynv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.8031, 1, 18.9201)
-mesh = SubResource("TorusMesh_lxq8b")
+skeleton = NodePath("")
 
-[node name="conduit4" type="MeshInstance3D" parent="."]
+[node name="conduit" parent="." instance=ExtResource("1_3kynv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.9659, 1, -22.7321)
-mesh = SubResource("TorusMesh_lxq8b")
+skeleton = NodePath("")
 
 [node name="barrier-sides" parent="." instance=ExtResource("15_shank")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08651, 0, 4.42033)
 
-[node name="conduit2" type="MeshInstance3D" parent="barrier-sides"]
+[node name="conduit 2" parent="barrier-sides" instance=ExtResource("1_3kynv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("TorusMesh_lxq8b")
-skeleton = NodePath("../..")
+skeleton = NodePath("")
 
 [node name="barrier-sides2" parent="barrier-sides" instance=ExtResource("15_shank")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
