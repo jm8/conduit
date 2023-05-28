@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://smdru0m6ixob"]
+
+[ext_resource type="PackedScene" uid="uid://bxuf61odshvr5" path="res://assets/decor/shelf-2.glb" id="1_x1bnf"]
+[ext_resource type="Material" uid="uid://voa43nr6pcwf" path="res://assets/decor/decor_metallic.tres" id="2_lntwh"]
+
+[node name="shelf-2" instance=ExtResource("1_x1bnf")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="scifiprops" parent="." index="0"]
+material_override = ExtResource("2_lntwh")
