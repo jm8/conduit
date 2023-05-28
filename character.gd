@@ -19,6 +19,8 @@ var ads_fov = 50.0
 var target_recoil = Vector3()
 var target_hand_rotation = Vector3()
 
+@export var is_aiming = false
+
 const SPEED = 12.0
 const JUMP_VELOCITY = 10
 const LERP_VAL = .125
@@ -58,9 +60,12 @@ func _unhandled_input(event):
 func _process(_delta):
 	var local_velocity = transform.inverse().basis * velocity
 	animation_tree.set("parameters/run/blend_position", Vector2(local_velocity.x, local_velocity.z) / 4)
-	animation_tree.set("parameters/look/blend_position", camera_rotation.rotation.x / (PI/2))
+	var total_x_rotation = (camera_rotation.transform * camera_recoil.transform).basis.get_euler().x
+	animation_tree.set("parameters/look/blend_position", total_x_rotation / (PI/2))
 	if Input.is_action_just_pressed("pause"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	animation_tree.set("parameters/aim_state/transition_request", "aiming" if is_aiming else "not_aiming")
 
 	if not is_multiplayer_authority(): return 
 
@@ -72,7 +77,8 @@ func _process(_delta):
 
 	var target_hand_position: Vector3
 	var target_fov
-	if Input.is_action_pressed("ads"):
+	is_aiming = Input.is_action_pressed("ads")
+	if is_aiming:
 		target_hand_position = ads_position
 		target_fov = ads_fov
 	else:
@@ -87,9 +93,15 @@ func _process(_delta):
 	if Input.is_action_pressed("fire"):
 		if not gun_animation_player.is_playing():
 			target_recoil += Vector3(.15 + randf_range(-0.05, 0.05), randf_range(-0.05, 0.05), 0)
+			play_fire_animation.rpc()
 		gun_animation_player.play("fire")
 	else:
 		camera.transform.origin = Vector3()
+
+@rpc
+func play_fire_animation():
+	animation_tree.set("parameters/aim_fire/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	animation_tree.set("parameters/fire/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
