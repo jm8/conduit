@@ -1,11 +1,15 @@
 class_name Character extends CharacterBody3D
 
 @onready var camera = %Camera
+@onready var camera_rotation = %CameraRotation
+@onready var camera_recoil = %CameraRecoil
 @onready var animation_tree = $AnimationTree
 @onready var gun_animation_player = %GunAnimationPlayer
 @onready var body = $Armature/Skeleton3D/Body
 @onready var gun3rd = %Gun3rd
 @onready var gun1st = %Gun1st
+
+var target_recoil = Vector3()
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -40,8 +44,10 @@ func _unhandled_input(event):
 
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * .005)
-		camera.rotate_x(-event.relative.y * .005)
-		camera.rotation.x = clamp(-PI/2, camera.rotation.x, PI/2)
+		camera_rotation.rotation.x += -event.relative.y * .005
+		print(camera_rotation.rotation.x)
+		print(-PI/2, PI/2)
+		camera_rotation.rotation.x = clamp(-PI/2, camera_rotation.rotation.x, PI/2)
 
 func _process(_delta):
 	var local_velocity = transform.inverse().basis * velocity
@@ -51,14 +57,14 @@ func _process(_delta):
 
 	if not is_multiplayer_authority(): return
 
+	camera_recoil.rotation = lerp(camera_recoil.rotation, target_recoil, .2)
+	target_recoil = lerp(target_recoil, Vector3(), .2)
+
 	if Input.is_action_pressed("fire"):
-		const MAX_CAM_SHAKE = 0.2
-		camera.transform.origin = lerp(camera.transform.origin, Vector3(
-			randf_range(-MAX_CAM_SHAKE, MAX_CAM_SHAKE),
-			randf_range(-MAX_CAM_SHAKE, MAX_CAM_SHAKE),
-			0),
-		0.5)
+		if not gun_animation_player.is_playing():
+			target_recoil += Vector3(.15, randf_range(-0.05, 0.05), 0)
 		gun_animation_player.play("fire")
+
 	else:
 		camera.transform.origin = Vector3()
 

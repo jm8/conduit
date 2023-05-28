@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxdc5xrxfbvhl"]
 
-[ext_resource type="Script" path="res://world.gd" id="1_4dlm1"]
+[ext_resource type="Script" path="res://world.gd" id="1_dbf41"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_w7c6n"]
 size = Vector2(20, 20)
@@ -12,7 +12,7 @@ size = Vector3(23, 2, 21)
 bg_color = Color(0, 0, 0, 1)
 
 [node name="World" type="Node3D"]
-script = ExtResource("1_4dlm1")
+script = ExtResource("1_dbf41")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_w7c6n")
