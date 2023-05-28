@@ -10,6 +10,12 @@ class_name Character extends CharacterBody3D
 @onready var gun1st = %Gun1st
 @onready var hand = %Hand
 
+@export var regular_position: Vector3
+@export var ads_position: Vector3
+
+var regular_fov = 70.0
+var ads_fov = 50.0
+
 var target_recoil = Vector3()
 var target_hand_rotation = Vector3()
 
@@ -47,7 +53,6 @@ func _unhandled_input(event):
 		target_hand_rotation += Vector3(-event.relative.y, -event.relative.x, 0) * .001
 		rotate_y(-event.relative.x * .005)
 		camera_rotation.rotation.x += -event.relative.y * .005
-		print(camera_rotation.rotation.x)
 		camera_rotation.rotation.x = clamp(-PI/2, camera_rotation.rotation.x, PI/2)
 
 func _process(_delta):
@@ -63,6 +68,20 @@ func _process(_delta):
 
 	camera_recoil.rotation = lerp(camera_recoil.rotation, target_recoil, .2)
 	target_recoil = lerp(target_recoil, Vector3(), .2)
+
+	var target_hand_position: Vector3
+	var target_fov
+	if Input.is_action_pressed("ads"):
+		target_hand_position = ads_position
+		target_fov = ads_fov
+	else:
+		target_hand_position = regular_position
+		target_fov = regular_fov
+	hand.position = lerp(hand.position, target_hand_position, .5)
+	camera.fov = lerp(camera.fov, target_fov, 0.5)
+	# if camera.fov == null:
+	# 	camera.fov = target_fov
+	# camera.fov = lerp(camera.fov, target_fov, .5)
 
 	if Input.is_action_pressed("fire"):
 		if not gun_animation_player.is_playing():
