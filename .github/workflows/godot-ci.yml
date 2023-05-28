@@ -9,6 +9,17 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v3.3.0
+
+    - name: install blender
+      run: |
+        wget 'https://mirrors.ocf.berkeley.edu/blender/release/Blender3.5/blender-3.5.1-linux-x64.tar.xz'
+        tar xf blender-3.5.1-linux-x64.tar.xz
+        echo '[gd_resource type="EditorSettings" format=3]' > ~/.config/godot/editor_settings-4.tres
+        echo '' >> ~/.config/godot/editor_settings-4.tres
+        echo '[resource]' >> ~/.config/godot/editor_settings-4.tres
+        echo filesystem/import/blender/blender3_path = \"$PWD/blender-3.5.1-linux-x64\" >> ~/.config/godot/editor_settings-4.tres
+
+
     - name: export game
       id: export
       uses: firebelley/godot-export@v5.1.0
@@ -28,4 +39,4 @@ jobs:
         GH_TOKEN: ${{ github.token }}
       run: |
         gh release create ${{ steps.tag-name.outputs.tagname }} -t "Game" -n "Game executables ${{ steps.tag-name.outputs.tagname }}"
-        gh release upload ${{ steps.tag-name.outputs.tagname }} builds/linux/conduit.x86_64 builds/win/conduit.exe builds/macos/conduit.zip
+        gh release upload ${{ steps.tag-name.outputs.tagname }} builds/*
