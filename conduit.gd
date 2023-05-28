@@ -1,3 +1,4 @@
+class_name Conduit
 extends MeshInstance3D
 
 enum ConduitState{

@@ -40,20 +40,20 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.129, 1, 24.57)
 skeleton = NodePath("")
 
+[node name="conduit 2" parent="." instance=ExtResource("1_3kynv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08651, 1, 4.42033)
+skeleton = NodePath("")
+
 [node name="conduit 3" parent="." instance=ExtResource("1_3kynv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.8031, 1, 18.9201)
 skeleton = NodePath("")
 
-[node name="conduit" parent="." instance=ExtResource("1_3kynv")]
+[node name="conduit 4" parent="." instance=ExtResource("1_3kynv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.9659, 1, -22.7321)
 skeleton = NodePath("")
 
 [node name="barrier-sides" parent="." instance=ExtResource("15_shank")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08651, 0, 4.42033)
-
-[node name="conduit 2" parent="barrier-sides" instance=ExtResource("1_3kynv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-skeleton = NodePath("")
 
 [node name="barrier-sides2" parent="barrier-sides" instance=ExtResource("15_shank")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
