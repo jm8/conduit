@@ -1,28 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxdc5xrxfbvhl"]
+[gd_scene load_steps=4 format=3 uid="uid://dxdc5xrxfbvhl"]
 
-[ext_resource type="Script" path="res://world.gd" id="1_4dlm1"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_w7c6n"]
-size = Vector2(20, 20)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_u0bq4"]
-size = Vector3(23, 2, 21)
+[ext_resource type="Script" path="res://world.gd" id="1_q1htd"]
+[ext_resource type="PackedScene" uid="uid://dan0jsoywmgi4" path="res://full_map_adieu.tscn" id="2_rfbg5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02ltk"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="World" type="Node3D"]
-script = ExtResource("1_4dlm1")
+script = ExtResource("1_q1htd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_w7c6n")
-skeleton = NodePath("")
+[node name="Map" parent="." instance=ExtResource("2_rfbg5")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource("BoxShape3D_u0bq4")
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.79653, -0.129829, 0.590495, 0, 0.976672, 0.214735, -0.604599, -0.171043, 0.777949, 30, 56.222, 0)
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 

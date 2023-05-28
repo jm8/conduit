@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://b3k8v1pja1wg2" path="res://assets/decor/metallic_table.tscn" id="19_gg8s1"]
 [ext_resource type="PackedScene" uid="uid://bsqgjfw0l1od" path="res://assets/buildings/building-arch.glb" id="19_objja"]
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2wqvh"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_qkb1x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x37tk"]
@@ -33,7 +35,10 @@ clearcoat_roughness = 1.0
 [sub_resource type="TorusMesh" id="TorusMesh_lxq8b"]
 material = SubResource("StandardMaterial3D_x37tk")
 
-[node name="Half Map Adieu" type="Node3D"]
+[node name="Half Map Adieu" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("WorldBoundaryShape3D_2wqvh")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
