@@ -57,7 +57,8 @@ func _unhandled_input(event):
 
 func _process(_delta):
 	var local_velocity = transform.inverse().basis * velocity
-	animation_tree.set("parameters/run/blend_position", Vector2(local_velocity.x, local_velocity.z) / SPEED)
+	animation_tree.set("parameters/run/blend_position", Vector2(local_velocity.x, local_velocity.z) / 4)
+	animation_tree.set("parameters/look/blend_position", camera_rotation.rotation.x / (PI/2))
 	if Input.is_action_just_pressed("pause"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
