@@ -1,6 +1,5 @@
 extends Node3D
 
-const World = preload("res://world.tscn")
 const CharacterScene = preload("res://character.tscn")
 
 @onready var menu = $MainMenu
@@ -46,6 +45,7 @@ func add_player(peer_id):
 	if peer_id == 1:
 		return
 	var character = CharacterScene.instantiate()
+	character.transform = get_node("Map/SpawnPosition").transform
 	character.name = str(peer_id)
 	add_child(character)
 

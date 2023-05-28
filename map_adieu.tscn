@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://i4sjq8ia8n1r"]
+[gd_scene load_steps=23 format=3 uid="uid://i4sjq8ia8n1r"]
 
 [ext_resource type="PackedScene" uid="uid://bao2m7gaurxyn" path="res://assets/buildings/building1.glb" id="1_vlaf4"]
 [ext_resource type="PackedScene" uid="uid://bq3fmb35fwikl" path="res://assets/buildings/building2.glb" id="2_fy18j"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://dfcrqj4ka661p" path="res://assets/buildings/building-l2.glb" id="18_rvu16"]
 [ext_resource type="PackedScene" uid="uid://bsqgjfw0l1od" path="res://assets/buildings/building-arch.glb" id="19_objja"]
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2wqvh"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_qkb1x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x37tk"]
@@ -32,7 +34,10 @@ clearcoat_roughness = 1.0
 [sub_resource type="TorusMesh" id="TorusMesh_lxq8b"]
 material = SubResource("StandardMaterial3D_x37tk")
 
-[node name="Half Map Adieu" type="Node3D"]
+[node name="Half Map Adieu" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("WorldBoundaryShape3D_2wqvh")
 
 [node name="Base" parent="." instance=ExtResource("1_vlaf4")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 50)

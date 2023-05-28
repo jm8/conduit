@@ -13,12 +13,12 @@ class_name Character extends CharacterBody3D
 var target_recoil = Vector3()
 var target_hand_rotation = Vector3()
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const SPEED = 12.0
+const JUMP_VELOCITY = 10
 const LERP_VAL = .125
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity = 20
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
