@@ -13,7 +13,8 @@ var ally_sprites: Array[Sprite2D];
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	map_aabb = map.get_global_transform() * map.get_aabb()
+	# map_aabb = map.get_global_transform() * map.get_aabb()
+	map_aabb = AABB(Vector3(), Vector3(400, 400, 1))
 	ratio = map_aabb.size.x / map_aabb.size.z
 	for conduit in get_tree().get_nodes_in_group("conduits"):
 		var conduit_sprite = conduit_sprite_scene.instantiate()

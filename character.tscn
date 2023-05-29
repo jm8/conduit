@@ -1,8 +1,7 @@
-[gd_scene load_steps=68 format=3 uid="uid://bialmm7gfx2mb"]
+[gd_scene load_steps=65 format=3 uid="uid://bialmm7gfx2mb"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_a1ebq"]
 [ext_resource type="PackedScene" uid="uid://cuv26sgrjr3u7" path="res://rifle.tscn" id="2_uaof0"]
-[ext_resource type="Shader" path="res://healthbar.gdshader" id="3_qavmy"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_gptbm"]
 albedo_color = Color(0, 0, 0, 1)
@@ -8834,12 +8833,6 @@ node_connections = [&"output", 0, &"weapons_blend", &"aim_fire", 0, &"Animation 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fntrs"]
 radius = 0.354114
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_31wsq"]
-shader = ExtResource("3_qavmy")
-shader_parameter/health = 0.695
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5e4jp"]
-
 [node name="Character" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_a1ebq")
@@ -8902,7 +8895,7 @@ bones/1/name = "Pelvis"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0.95981, 0)
 bones/1/enabled = true
-bones/1/position = Vector3(0, 0.851838, 0)
+bones/1/position = Vector3(0, 0.834417, 0)
 bones/1/rotation = Quaternion(0, 1.19209e-07, 0, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Torso"
@@ -9092,42 +9085,42 @@ bones/28/parent = 1
 bones/28/rest = Transform3D(4.17233e-07, -6.87316e-07, -1.00004, -0.0372244, -0.999307, 6.7244e-07, -0.999307, 0.0372244, -4.76855e-07, 0.148492, 0.0494652, 4.20493e-08)
 bones/28/enabled = true
 bones/28/position = Vector3(0.148492, 0.0494652, 4.20493e-08)
-bones/28/rotation = Quaternion(0.66026, -0.253096, -0.660259, 0.253094)
+bones/28/rotation = Quaternion(0.652922, -0.271467, -0.652921, 0.271465)
 bones/28/scale = Vector3(1, 1, 1.00011)
 bones/29/name = "LowerLeg.L"
 bones/29/parent = 28
 bones/29/rest = Transform3D(0.997725, 0.0674207, -9.32493e-08, -0.0674207, 0.997725, -1.57415e-08, 9.19758e-08, 2.19926e-08, 1, -8.53822e-10, 0.427051, 1.73202e-08)
 bones/29/enabled = true
 bones/29/position = Vector3(-8.53822e-10, 0.427051, 1.73202e-08)
-bones/29/rotation = Quaternion(1.07461e-07, -4.18191e-08, -0.344996, 0.938604)
+bones/29/rotation = Quaternion(1.22141e-07, -4.02914e-08, -0.386388, 0.922336)
 bones/29/scale = Vector3(1, 1, 1)
 bones/30/name = "Foot.L"
 bones/30/parent = 29
 bones/30/rest = Transform3D(0.213094, -0.977032, 2.20738e-07, 0.977032, 0.213094, 1.47905e-06, -1.49212e-06, -9.95084e-08, 1, -4.12435e-10, 0.525807, 1.7537e-10)
 bones/30/enabled = true
 bones/30/position = Vector3(-4.12435e-10, 0.525807, 1.7537e-10)
-bones/30/rotation = Quaternion(-1.03097e-06, 5.05878e-07, 0.603556, 0.79732)
+bones/30/rotation = Quaternion(-1.04694e-06, 4.85569e-07, 0.616597, 0.787279)
 bones/30/scale = Vector3(1, 1, 1)
 bones/31/name = "UpperLeg.R"
 bones/31/parent = 1
 bones/31/rest = Transform3D(1.19209e-07, 6.85453e-07, 1.00004, 0.0372258, -0.999307, 6.81753e-07, 0.999307, 0.0372258, 0, -0.148492, 0.0494652, -2.87571e-08)
 bones/31/enabled = true
 bones/31/position = Vector3(-0.148492, 0.0494652, -2.87571e-08)
-bones/31/rotation = Quaternion(0.706898, 0.0171434, 0.706899, 0.0171421)
+bones/31/rotation = Quaternion(0.706358, 0.0325183, 0.706359, 0.032517)
 bones/31/scale = Vector3(1, 1, 1.00011)
 bones/32/name = "LowerLeg.R"
 bones/32/parent = 31
 bones/32/rest = Transform3D(0.997725, -0.0674207, 9.2753e-08, 0.0674207, 0.997725, 1.99698e-09, -9.26766e-08, 4.26103e-09, 1, 2.76168e-09, 0.427051, -1.7049e-08)
 bones/32/enabled = true
 bones/32/position = Vector3(2.76168e-09, 0.427051, -1.7049e-08)
-bones/32/rotation = Quaternion(1.6684e-08, 4.18677e-08, 0.344995, 0.938604)
+bones/32/rotation = Quaternion(2.04697e-08, 4.03399e-08, 0.386387, 0.922337)
 bones/32/scale = Vector3(1, 1, 1)
 bones/33/name = "Foot.R"
 bones/33/parent = 32
 bones/33/rest = Transform3D(0.213094, 0.977032, -2.19987e-07, -0.977032, 0.213094, 1.47637e-06, 1.48934e-06, -9.96708e-08, 1, 1.81309e-10, 0.525807, 1.50768e-08)
 bones/33/enabled = true
 bones/33/position = Vector3(1.81309e-10, 0.525807, 1.50768e-08)
-bones/33/rotation = Quaternion(-8.6845e-07, -7.27174e-07, -0.835901, 0.548881)
+bones/33/rotation = Quaternion(-8.82021e-07, -7.1262e-07, -0.848133, 0.529783)
 bones/33/scale = Vector3(1, 1, 1)
 bones/34/name = "KneePoleTarget.L"
 bones/34/parent = 0
@@ -9159,7 +9152,7 @@ bones/37/rotation = Quaternion(0.557835, 0.434535, 0.557835, 0.434535)
 bones/37/scale = Vector3(1, 1, 1)
 
 [node name="Camera_2" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(-0.994521, 0.0965768, -0.0400029, 0.0965768, 0.995324, 0.00193698, 0.0400029, -0.00193698, -0.999198, 0.0502588, 1.74569, 0.0224828)
+transform = Transform3D(-0.994521, 0.0965768, -0.0400029, 0.0965768, 0.995324, 0.00193698, 0.0400029, -0.00193698, -0.999198, 0.0502588, 1.72827, 0.0224828)
 bone_name = "Camera_2"
 bone_idx = 7
 
@@ -9169,7 +9162,7 @@ mesh = SubResource("ArrayMesh_chdtm")
 skin = SubResource("Skin_7yqtc")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.0965777, 0.010166, 0.995274, 0.995324, 0.000960186, -0.0965924, -0.00193767, 0.999948, -0.0100258, -0.0160816, 1.48225, 0.604368)
+transform = Transform3D(0.0965777, 0.010166, 0.995274, 0.995324, 0.000960186, -0.0965924, -0.00193767, 0.999948, -0.0100258, -0.0160816, 1.46483, 0.604368)
 bone_name = "RifleIK"
 bone_idx = 25
 
@@ -9205,31 +9198,3 @@ parameters/weapons_blend/blend_amount = 1.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.887816, -0.1)
 shape = SubResource("CapsuleShape3D_fntrs")
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Healthbar" type="TextureRect" parent="UI"]
-unique_name_in_owner = true
-visible = false
-material = SubResource("ShaderMaterial_31wsq")
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 14.0
-offset_right = 200.0
-offset_bottom = 65.0
-grow_horizontal = 2
-texture = SubResource("PlaceholderTexture2D_5e4jp")
-
-[node name="Status" type="Label" parent="UI"]
-unique_name_in_owner = true
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 30.0
-offset_top = -30.0
-offset_bottom = -30.0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 25

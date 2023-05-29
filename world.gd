@@ -1,6 +1,7 @@
 extends Node3D
 
 const CharacterScene = preload("res://character.tscn")
+const GameUIScene = preload("res://game_ui.tscn")
 
 @onready var menu = $MainMenu
 @onready var host_ui = $HostUi
@@ -42,6 +43,8 @@ func _on_join_button_pressed():
 	multiplayer.multiplayer_peer = Globulars.enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	menu.queue_free()
+	var ui = GameUIScene.instantiate()
+	add_child(ui)
 
 func add_player(peer_id):
 	print(peer_id)

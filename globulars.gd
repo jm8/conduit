@@ -10,6 +10,8 @@ var world
 
 var characters: Array[Character]
 
+var gameui: GameUI
+
 func update_characters():
 	var new_characters: Array[Character] = []
 	for i in range(world.get_child_count()):

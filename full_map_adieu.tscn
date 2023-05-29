@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dan0jsoywmgi4"]
 
 [ext_resource type="Script" path="res://full_map_adieu.gd" id="1_5yffn"]
-[ext_resource type="PackedScene" uid="uid://i4sjq8ia8n1r" path="res://map_adieu.tscn" id="1_tsfs4"]
+[ext_resource type="PackedScene" uid="uid://bub74vuvsifwg" path="res://map_adieu.tscn" id="1_tsfs4"]
 [ext_resource type="Texture2D" uid="uid://cjc8ithy0yirs" path="res://assets/nightskycolor.png" id="2_6cefc"]
 [ext_resource type="PackedScene" uid="uid://b5qfw16641iu4" path="res://conduit.tscn" id="3_sb0j8"]
 

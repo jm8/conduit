@@ -15,7 +15,6 @@ enum Team {
 @onready var gun3rd = %Gun3rd
 @onready var gun1st = %Gun1st
 @onready var hand = %Hand
-@onready var healthbar = %Healthbar
 @onready var raycast: RayCast3D = %RayCast
 @onready var status = %Status
 
@@ -69,7 +68,6 @@ func _ready():
 	if not is_multiplayer_authority(): return
 	make_first_person()
 
-	healthbar.visible = true
 	gun1st.visible = true
 	body.visible = false
 	gun3rd.visible = false
@@ -111,9 +109,6 @@ func _process(_delta):
 	animation_tree.set("parameters/aim_state/transition_request", "aiming" if is_aiming else "not_aiming")
 
 	healthbar_current = lerp(healthbar_current, health / max_health, .5)
-	if healthbar.visible:
-		# shader param is shared so only set it for visible (ie current player or spectating player)
-		healthbar.material.set_shader_parameter("health", healthbar_current)
 
 	if not is_multiplayer_authority(): return
 
@@ -179,14 +174,12 @@ func add_bullet_hole(bullet_team, raycast_position, collision_point, collision_n
 	decal.modulate = Color(0, 1, 0) if bullet_team == Team.Green else Color(1, 0, 0)
 
 func make_third_person():
-	healthbar.visible = false
 	gun1st.visible = false
 	gun3rd.visible = true
 	body.visible = true
 	camera.current = false
 
 func make_first_person():
-	healthbar.visible = true
 	gun1st.visible = true
 	gun3rd.visible = false
 	body.visible = false
@@ -219,7 +212,6 @@ func change_spectate(step):
 	if not Globulars.characters[spectate_index].dead:
 		spectate_character = Globulars.characters[spectate_index]
 		spectate_character.make_first_person()
-		status.text = "Spectating " + spectate_character.name
 
 func _physics_process(delta):
 	if dead or not is_multiplayer_authority(): return
