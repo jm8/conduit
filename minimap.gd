@@ -28,16 +28,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# remove graph edges
+	for c in $background.get_children():
+		$background.remove_child(c)
 	var ally_nodes = get_tree().get_nodes_in_group("allies")
 	for i in ally_nodes.size():
 		var pos = ally_nodes[i].position
 		var ally_sprite = ally_sprites[i]
 		var normalized_position: Vector2 = Vector2((pos.x - map_aabb.position.x) / map_aabb.size.x,
 		(pos.z - map_aabb.position.z) / map_aabb.size.z)
-		if normalized_position.x > 1 or normalized_position.x < 0 or normalized_position.y > 1 or normalized_position.y < 0:
-			ally_sprite.visible = false
-		else:
-			ally_sprite.visible = true
 		ally_sprite.position = Vector2(normalized_position.x * $background.size.x, 
 		normalized_position.y * $background.size.y) + $background.position
 	
@@ -47,12 +46,24 @@ func _process(delta):
 		var conduit_sprite = conduit_sprites[i]
 		var normalized_position: Vector2 = Vector2((pos.x - map_aabb.position.x) / map_aabb.size.x,
 		(pos.z - map_aabb.position.z) / map_aabb.size.z)
-		if normalized_position.x > 1 or normalized_position.x < 0 or normalized_position.y > 1 or normalized_position.y < 0:
-			conduit_sprite.visible = false
-		else:
-			conduit_sprite.visible = true
 		conduit_sprite.position = Vector2(normalized_position.x * $background.size.x, 
 		normalized_position.y * $background.size.y) + $background.position
+		for c in conduit_nodes[i].nexts:
+			var l = Line2D.new()
+			l.add_point(conduit_sprite.position - $background.position)
+			var next_pos = c.position
+			var normalized_next_position: Vector2 = Vector2((pos.x - map_aabb.position.x) / map_aabb.size.x,
+			(pos.z - map_aabb.position.z) / map_aabb.size.z)
+			l.add_point(Vector2(normalized_position.x * $background.size.x, 
+			normalized_position.y * $background.size.y))
+			if conduit_nodes[i].state == Conduit.ConduitState.Orange and c.state == Conduit.ConduitState.Orange:
+				l.default_color = Color(1, 0.5, 1)
+			elif conduit_nodes[i].state == Conduit.ConduitState.Green and c.state == Conduit.ConduitState.Green:
+				l.default_color = Color(0, 1, 0)
+			else:
+				l.default_color = Color(0.75, 0.75, 0.75)
+			$background.add_child(l)
+			
 	
 	if Globulars.character != null:
 		var pos = Globulars.character.position
