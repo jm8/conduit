@@ -23,6 +23,30 @@ properties/4/sync = true
 properties/5/path = NodePath("../../CameraRotation/CameraRecoil:rotation")
 properties/5/spawn = true
 properties/5/sync = true
+properties/6/path = NodePath("../..:dead")
+properties/6/spawn = true
+properties/6/sync = true
+properties/7/path = NodePath("../..:visible")
+properties/7/spawn = true
+properties/7/sync = true
+properties/8/path = NodePath("../../CollisionShape3D:disabled")
+properties/8/spawn = true
+properties/8/sync = true
+properties/9/path = NodePath("../..:health")
+properties/9/spawn = true
+properties/9/sync = true
+properties/10/path = NodePath("../../CameraRotation/CameraRecoil/Camera/Hand:position")
+properties/10/spawn = true
+properties/10/sync = true
+properties/11/path = NodePath("../../CameraRotation/CameraRecoil/Camera/Hand:rotation")
+properties/11/spawn = true
+properties/11/sync = true
+properties/12/path = NodePath("../../CameraRotation/CameraRecoil/Camera/Hand/Gun1st:position")
+properties/12/spawn = true
+properties/12/sync = true
+properties/13/path = NodePath("../../CameraRotation/CameraRecoil/Camera/Hand/Gun1st:rotation")
+properties/13/spawn = true
+properties/13/sync = true
 
 [sub_resource type="Animation" id="Animation_822gb"]
 length = 0.001
@@ -8849,7 +8873,7 @@ node_connections = [&"output", 0, &"weapons_blend", &"aim_fire", 0, &"Animation 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fntrs"]
 radius = 0.354114
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jajs8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_31wsq"]
 shader = ExtResource("3_qavmy")
 shader_parameter/health = 0.695
 
@@ -8915,7 +8939,7 @@ bones/1/name = "Pelvis"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0.95981, 0)
 bones/1/enabled = true
-bones/1/position = Vector3(0, 0.805705, 0)
+bones/1/position = Vector3(0, 0.866275, 0)
 bones/1/rotation = Quaternion(0, 1.19209e-07, 0, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Torso"
@@ -9105,56 +9129,56 @@ bones/28/parent = 1
 bones/28/rest = Transform3D(4.17233e-07, -6.87316e-07, -1.00004, -0.0372244, -0.999307, 6.7244e-07, -0.999307, 0.0372244, -4.76855e-07, 0.148492, 0.0494652, 4.20493e-08)
 bones/28/enabled = true
 bones/28/position = Vector3(0.148492, 0.0494652, 4.20493e-08)
-bones/28/rotation = Quaternion(0.67441, -0.211429, -0.674985, 0.211813)
+bones/28/rotation = Quaternion(0.647268, -0.285887, -0.646469, 0.285291)
 bones/28/scale = Vector3(1, 1, 1.00011)
 bones/29/name = "LowerLeg.L"
 bones/29/parent = 28
 bones/29/rest = Transform3D(0.997725, 0.0674207, -9.32493e-08, -0.0674207, 0.997725, -1.57415e-08, 9.19758e-08, 2.19926e-08, 1, -8.53822e-10, 0.427051, 1.73202e-08)
 bones/29/enabled = true
 bones/29/position = Vector3(-8.53822e-10, 0.427051, 1.73202e-08)
-bones/29/rotation = Quaternion(3.05841e-07, 9.84493e-09, -0.772042, 0.635571)
+bones/29/rotation = Quaternion(1.18684e-07, -4.06312e-08, -0.377016, 0.926207)
 bones/29/scale = Vector3(1, 1, 1)
 bones/30/name = "Foot.L"
 bones/30/parent = 29
 bones/30/rest = Transform3D(0.213094, -0.977032, 2.20738e-07, 0.977032, 0.213094, 1.47905e-06, -1.49212e-06, -9.95084e-08, 1, -4.12435e-10, 0.525807, 1.7537e-10)
 bones/30/enabled = true
 bones/30/position = Vector3(-4.12435e-10, 0.525807, 1.7537e-10)
-bones/30/rotation = Quaternion(-0.000133576, 0.000510425, 0.676637, 0.736317)
+bones/30/rotation = Quaternion(0.000123748, -0.000830561, 0.695448, 0.718576)
 bones/30/scale = Vector3(1, 1, 1)
 bones/31/name = "UpperLeg.R"
 bones/31/parent = 1
 bones/31/rest = Transform3D(1.19209e-07, 6.85453e-07, 1.00004, 0.0372258, -0.999307, 6.81753e-07, 0.999307, 0.0372258, 0, -0.148492, 0.0494652, -2.87571e-08)
 bones/31/enabled = true
 bones/31/position = Vector3(-0.148492, 0.0494652, -2.87571e-08)
-bones/31/rotation = Quaternion(0.705047, 0.049597, 0.705595, 0.0508362)
+bones/31/rotation = Quaternion(0.647208, -0.28339, 0.648176, -0.284042)
 bones/31/scale = Vector3(1, 1, 1.00011)
 bones/32/name = "LowerLeg.R"
 bones/32/parent = 31
 bones/32/rest = Transform3D(0.997725, -0.0674207, 9.2753e-08, 0.0674207, 0.997725, 1.99698e-09, -9.26766e-08, 4.26103e-09, 1, 2.76168e-09, 0.427051, -1.7049e-08)
 bones/32/enabled = true
 bones/32/position = Vector3(2.76168e-09, 0.427051, -1.7049e-08)
-bones/32/rotation = Quaternion(2.76433e-08, 3.67985e-08, 0.446694, 0.894687)
+bones/32/rotation = Quaternion(1.61517e-09, 4.6307e-08, 0.0444477, 0.999012)
 bones/32/scale = Vector3(1, 1, 1)
 bones/33/name = "Foot.R"
 bones/33/parent = 32
 bones/33/rest = Transform3D(0.213094, 0.977032, -2.19987e-07, -0.977032, 0.213094, 1.47637e-06, 1.48934e-06, -9.96708e-08, 1, 1.81309e-10, 0.525807, 1.50768e-08)
 bones/33/enabled = true
 bones/33/position = Vector3(1.81309e-10, 0.525807, 1.50768e-08)
-bones/33/rotation = Quaternion(0.000352059, 2.38802e-06, -0.790655, 0.612262)
+bones/33/rotation = Quaternion(0.00038528, -0.000247756, -0.49839, 0.866953)
 bones/33/scale = Vector3(1, 1, 1)
 bones/34/name = "KneePoleTarget.L"
 bones/34/parent = 0
 bones/34/rest = Transform3D(4.76837e-07, 0, -1, -1, 0, -4.76837e-07, 0, 1, 0, 0.148492, 0.58252, 1.2159)
 bones/34/enabled = true
-bones/34/position = Vector3(0.149667, 0.58252, 1.2159)
+bones/34/position = Vector3(0.146797, 0.58252, 1.2159)
 bones/34/rotation = Quaternion(0.5, -0.5, -0.5, 0.5)
 bones/34/scale = Vector3(1, 1, 1)
 bones/35/name = "FootIK.L"
 bones/35/parent = 0
 bones/35/rest = Transform3D(5.96046e-08, -2.98023e-08, -1, -0.969594, -0.244719, -1.78814e-07, -0.244719, 0.969594, -2.38419e-07, 0.148492, 0.0569533, 6.64608e-09)
 bones/35/enabled = true
-bones/35/position = Vector3(0.148822, 0.294863, -0.236594)
-bones/35/rotation = Quaternion(0.697666, -0.115978, -0.697361, 0.116182)
+bones/35/position = Vector3(0.147547, 0.116189, 0.401732)
+bones/35/rotation = Quaternion(0.464282, -0.533598, -0.464794, 0.532617)
 bones/35/scale = Vector3(1, 1, 1)
 bones/36/name = "KneePoleTarget.R"
 bones/36/parent = 0
@@ -9167,21 +9191,22 @@ bones/37/name = "FootIK.R"
 bones/37/parent = 0
 bones/37/rest = Transform3D(5.96046e-08, 2.98023e-08, 1, 0.969594, -0.244719, -1.78814e-07, 0.244719, 0.969594, -2.38419e-07, -0.148492, 0.0569533, 6.64608e-09)
 bones/37/enabled = true
-bones/37/position = Vector3(-0.150123, 0.0657042, -0.311784)
-bones/37/rotation = Quaternion(0.613818, 0.350765, 0.613635, 0.35163)
+bones/37/position = Vector3(-0.147027, 0.29829, -0.7388)
+bones/37/rotation = Quaternion(0.705034, 0.0457701, 0.706238, 0.0453802)
 bones/37/scale = Vector3(1, 1, 1)
 
 [node name="Camera_2" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(-0.994735, 0.0967033, -0.0339301, 0.086986, 0.971753, 0.219385, 0.0541868, 0.215279, -0.975048, 0.0501807, 1.68115, 0.155979)
+transform = Transform3D(-0.994735, 0.0967033, -0.0339299, 0.086986, 0.971753, 0.219385, 0.0541866, 0.215279, -0.975048, 0.0501807, 1.74172, 0.155979)
 bone_name = "Camera_2"
 bone_idx = 7
 
 [node name="Body" type="MeshInstance3D" parent="Armature/Skeleton3D"]
+unique_name_in_owner = true
 mesh = SubResource("ArrayMesh_chdtm")
 skin = SubResource("Skin_7yqtc")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.0967042, 0.00408946, 0.995305, 0.971753, -0.216678, -0.0935256, 0.215278, 0.976235, -0.0249275, -0.0197253, 1.29749, 0.666188)
+transform = Transform3D(0.0967042, 0.00408925, 0.995305, 0.971753, -0.216678, -0.0935257, 0.215278, 0.976235, -0.0249274, -0.0197254, 1.35806, 0.666188)
 bone_name = "RifleIK"
 bone_idx = 25
 
@@ -9218,12 +9243,12 @@ parameters/weapons_blend/blend_amount = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.887816, -0.1)
 shape = SubResource("CapsuleShape3D_fntrs")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Healthbar" type="TextureRect" parent="CanvasLayer"]
+[node name="Healthbar" type="TextureRect" parent="UI"]
 unique_name_in_owner = true
 visible = false
-material = SubResource("ShaderMaterial_jajs8")
+material = SubResource("ShaderMaterial_31wsq")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -9233,3 +9258,15 @@ offset_right = 200.0
 offset_bottom = 65.0
 grow_horizontal = 2
 texture = SubResource("PlaceholderTexture2D_5e4jp")
+
+[node name="Status" type="Label" parent="UI"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -30.0
+offset_bottom = -30.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25

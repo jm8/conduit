@@ -17,12 +17,17 @@ enum Team {
 @onready var hand = %Hand
 @onready var healthbar = %Healthbar
 @onready var raycast: RayCast3D = %RayCast
+@onready var status = %Status
 
 @export var regular_position: Vector3
 @export var ads_position: Vector3
 @export var max_health: float = 100
 @export var health: float = max_health
 @export var team: Team
+@export var dead = false
+
+var spectate_index = 0
+var spectate_character = null
 
 var regular_damage = 10
 var regular_fov = 70.0
@@ -47,8 +52,12 @@ func _enter_tree():
 		Globulars.character = self
 
 func _ready():
+	Globulars.update_characters()
 	animation_tree.active = true
-	if not is_multiplayer_authority(): return
+	make_third_person()
+
+	if dead or not is_multiplayer_authority(): return
+	make_first_person()
 
 	healthbar.visible = true
 	gun1st.visible = true
@@ -68,7 +77,7 @@ func _notification(what):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event):
-	if not is_multiplayer_authority(): return
+	if dead or not is_multiplayer_authority(): return
 
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and event is InputEventMouseMotion:
 		target_hand_rotation += Vector3(-event.relative.y, -event.relative.x, 0) * .001
@@ -77,6 +86,10 @@ func _unhandled_input(event):
 		camera_rotation.rotation.x = clamp(-PI/2, camera_rotation.rotation.x, PI/2)
 
 func _process(_delta):
+	# if dead:
+	# 	print("\n", "spectate_index=", spectate_index)
+	# 	for i in range(len(Globulars.characters)):
+	# 		print(i, " ", Globulars.characters[i], " ", Globulars.characters[i].dead)
 	var local_velocity = transform.inverse().basis * velocity
 	animation_tree.set("parameters/run/blend_position", Vector2(local_velocity.x, local_velocity.z) / 4)
 	var total_x_rotation = (camera_rotation.transform * camera_recoil.transform).basis.get_euler().x
@@ -86,10 +99,18 @@ func _process(_delta):
 
 	animation_tree.set("parameters/aim_state/transition_request", "aiming" if is_aiming else "not_aiming")
 
+	healthbar_current = lerp(healthbar_current, health / max_health, .5)
+	if healthbar.visible:
+		# shader param is shared so only set it for visible (ie current player or spectating player)
+		healthbar.material.set_shader_parameter("health", healthbar_current)
+
 	if not is_multiplayer_authority(): return
 
-	healthbar_current = lerp(healthbar_current, health / max_health, .5)
-	healthbar.material.set_shader_parameter("health", healthbar_current)
+	if dead:
+		if Input.is_action_just_pressed("fire"):
+			change_spectate(1)
+		elif Input.is_action_just_pressed("ads"):
+			change_spectate(-1)
 
 	hand.rotation = lerp(hand.rotation,target_hand_rotation, .2)
 	target_hand_rotation = lerp(target_hand_rotation, Vector3(), .2)
@@ -133,9 +154,10 @@ func play_fire_animation():
 
 @rpc("any_peer")
 func take_damage(damage):
+	if dead or not is_multiplayer_authority(): return
 	health -= damage
 	if health <= 0:
-		queue_free()
+		die()
 
 @rpc("any_peer", "call_local")
 func add_bullet_hole(raycast_position, collision_point, collision_normal):
@@ -144,8 +166,51 @@ func add_bullet_hole(raycast_position, collision_point, collision_normal):
 	decal.global_position = collision_point
 	decal.look_at(raycast_position, collision_point + collision_normal)
 
+func make_third_person():
+	healthbar.visible = false
+	gun1st.visible = false
+	gun3rd.visible = true
+	body.visible = true
+	camera.current = false
+
+func make_first_person():
+	healthbar.visible = true
+	gun1st.visible = true
+	gun3rd.visible = false
+	body.visible = false
+	camera.current = true
+
+func die():
+	dead = true
+	camera.current = false
+	visible = false
+	$CollisionShape3D.disabled = true
+	spectate_index = -1
+	change_spectate(1)
+	for c in Globulars.characters:
+		c.brodcast_death.rpc(name)
+
+@rpc("any_peer", "call_local")
+func brodcast_death(character_name):
+	if spectate_character and spectate_character.name == character_name:
+		change_spectate(1)
+
+func change_spectate(step):
+	if not is_multiplayer_authority():
+		return
+	var loop_detect = spectate_index
+	if spectate_index >= 0:
+		Globulars.characters[spectate_index].make_third_person()
+	spectate_index = posmod((spectate_index + step), len(Globulars.characters))
+	while Globulars.characters[spectate_index].dead and spectate_index != loop_detect:
+		spectate_index = posmod((spectate_index + step), len(Globulars.characters))
+	if not Globulars.characters[spectate_index].dead:
+		spectate_character = Globulars.characters[spectate_index]
+		spectate_character.make_first_person()
+		status.text = "Spectating " + spectate_character.name
+
 func _physics_process(delta):
-	if not is_multiplayer_authority(): return
+	if dead or not is_multiplayer_authority(): return
 
 	# Add the gravity.
 	if not is_on_floor():

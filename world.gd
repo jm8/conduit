@@ -9,6 +9,9 @@ const CharacterScene = preload("res://character.tscn")
 
 const PORT = 45865
 
+func _enter_tree():
+	Globulars.world = self
+
 func _ready():
 	var args := OS.get_cmdline_args()
 	for arg in args:
