@@ -10,19 +10,20 @@ class_name Character extends CharacterBody3D
 @onready var gun1st = %Gun1st
 @onready var hand = %Hand
 @onready var healthbar = %Healthbar
+@onready var raycast: RayCast3D = %RayCast
 
 @export var regular_position: Vector3
 @export var ads_position: Vector3
 @export var max_health: float = 100
 @export var health: float = max_health
 
-var healthbar_current: float = 0
-
+var regular_damage = 10
 var regular_fov = 70.0
 var ads_fov = 50.0
 
 var target_recoil = Vector3()
 var target_hand_rotation = Vector3()
+var healthbar_current: float = 0
 
 @export var is_aiming = false
 
@@ -101,6 +102,10 @@ func _process(_delta):
 
 	if Input.is_action_pressed("fire"):
 		if not gun_animation_player.is_playing():
+			if raycast.is_colliding():
+				var hit = raycast.get_collider()
+				if hit is Character:
+					hit.take_damage.rpc(regular_damage)
 			target_recoil += Vector3(.15 + randf_range(-0.05, 0.05), randf_range(-0.05, 0.05), 0)
 			play_fire_animation.rpc()
 		gun_animation_player.play("fire")
@@ -111,6 +116,12 @@ func _process(_delta):
 func play_fire_animation():
 	animation_tree.set("parameters/aim_fire/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	animation_tree.set("parameters/fire/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+@rpc("any_peer")
+func take_damage(damage):
+	health -= damage
+	if health <= 0:
+		queue_free()
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -127,9 +138,12 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var current_speed = SPEED
+	if is_aiming:
+		current_speed /= 2
 	if direction:
-		velocity.x = lerp(velocity.x, direction.x * SPEED, LERP_VAL)
-		velocity.z = lerp(velocity.z, direction.z * SPEED, LERP_VAL)
+		velocity.x = lerp(velocity.x, direction.x * current_speed, LERP_VAL)
+		velocity.z = lerp(velocity.z, direction.z * current_speed, LERP_VAL)
 	else:
 		velocity.x = lerp(velocity.x, 0.0, LERP_VAL)
 		velocity.z = lerp(velocity.z, 0.0, LERP_VAL)
