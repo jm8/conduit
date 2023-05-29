@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bub74vuvsifwg"]
+[gd_scene load_steps=26 format=3 uid="uid://bub74vuvsifwg"]
 
 [ext_resource type="PackedScene" uid="uid://b5qfw16641iu4" path="res://conduit.tscn" id="1_3kynv"]
 [ext_resource type="PackedScene" uid="uid://cpy1he7q2plea" path="res://assets/buildings/barrier_sides.tscn" id="3_6f0eo"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://6a502l6ol5sp" path="res://building_l.tscn" id="13_3mu0k"]
 [ext_resource type="PackedScene" uid="uid://uuejhsqpew8i" path="res://building_l_4.tscn" id="14_7lb22"]
 [ext_resource type="PackedScene" uid="uid://r2oiygjckxga" path="res://building_garage.tscn" id="15_sab3n"]
-[ext_resource type="PackedScene" uid="uid://dvhgptv3qkpjf" path="res://assets/buildings/barrier-sides.glb" id="15_shank"]
 [ext_resource type="PackedScene" uid="uid://xpn6bjl1kysb" path="res://building_9.tscn" id="16_pwixd"]
 [ext_resource type="PackedScene" uid="uid://bsfhmydkmwt1w" path="res://building_3.tscn" id="17_sth2o"]
 [ext_resource type="PackedScene" uid="uid://7ohpiusr0f68" path="res://building_l_3.tscn" id="19_78hcg"]
@@ -55,10 +54,10 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.9659, 1, -22.7321)
 skeleton = NodePath("")
 
-[node name="barrier-sides2" parent="." instance=ExtResource("15_shank")]
+[node name="barrier-sides3" parent="." instance=ExtResource("3_6f0eo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08651, 0, 4.42033)
 
-[node name="barrier-sides" parent="barrier-sides2" instance=ExtResource("3_6f0eo")]
+[node name="barrier-sides" parent="barrier-sides3" instance=ExtResource("3_6f0eo")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="buildings" type="Node3D" parent="."]
