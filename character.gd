@@ -23,8 +23,18 @@ enum Team {
 @export var ads_position: Vector3
 @export var max_health: float = 100
 @export var health: float = max_health
-@export var team: Team
+@export var team: Team:
+	set(new_team):
+		team = new_team
+		var light_material = green_material if team == Team.Green else orange_material
+		body.set_surface_override_material(1, light_material)
+		gun1st.light_material = light_material
+		gun3rd.light_material = light_material
+	get:
+		return team
 @export var dead = false
+@export var orange_material: ORMMaterial3D
+@export var green_material: ORMMaterial3D
 
 var spectate_index = 0
 var spectate_character = null
@@ -56,7 +66,7 @@ func _ready():
 	animation_tree.active = true
 	make_third_person()
 
-	if dead or not is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 	make_first_person()
 
 	healthbar.visible = true
@@ -71,6 +81,7 @@ func _ready():
 		team = Team.Orange
 	else:
 		team = Team.Green
+
 
 func _notification(what):
 	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
@@ -217,7 +228,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.

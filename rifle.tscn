@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuv26sgrjr3u7"]
+
+[ext_resource type="PackedScene" uid="uid://bllw53ictuofw" path="res://assets/Rifle.blend" id="1_p0rx6"]
+[ext_resource type="Script" path="res://Rifle.gd" id="2_2nmcu"]
+
+[node name="Rifle" instance=ExtResource("1_p0rx6")]
+script = ExtResource("2_2nmcu")
