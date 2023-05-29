@@ -9172,7 +9172,7 @@ bones/37/rotation = Quaternion(0.613818, 0.350765, 0.613635, 0.35163)
 bones/37/scale = Vector3(1, 1, 1)
 
 [node name="Camera_2" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(-0.994735, 0.0967033, -0.0339299, 0.086986, 0.971753, 0.219385, 0.0541866, 0.215279, -0.975048, 0.0501807, 1.68115, 0.155979)
+transform = Transform3D(-0.994735, 0.0967033, -0.0339301, 0.086986, 0.971753, 0.219385, 0.0541868, 0.215279, -0.975048, 0.0501807, 1.68115, 0.155979)
 bone_name = "Camera_2"
 bone_idx = 7
 
@@ -9181,7 +9181,7 @@ mesh = SubResource("ArrayMesh_chdtm")
 skin = SubResource("Skin_7yqtc")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.0967042, 0.00408925, 0.995305, 0.971753, -0.216678, -0.0935257, 0.215278, 0.976235, -0.0249274, -0.0197254, 1.29749, 0.666188)
+transform = Transform3D(0.0967042, 0.00408946, 0.995305, 0.971753, -0.216678, -0.0935256, 0.215278, 0.976235, -0.0249275, -0.0197253, 1.29749, 0.666188)
 bone_name = "RifleIK"
 bone_idx = 25
 
