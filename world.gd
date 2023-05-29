@@ -50,6 +50,8 @@ func add_player(peer_id):
 	add_child(character)
 
 func remove_player(peer_id):
+	print("remove", peer_id)
 	var player = get_node_or_null(str(peer_id))
+	print(player)
 	if player:
 		player.queue_free()
