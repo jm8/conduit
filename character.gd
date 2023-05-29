@@ -9,9 +9,14 @@ class_name Character extends CharacterBody3D
 @onready var gun3rd = %Gun3rd
 @onready var gun1st = %Gun1st
 @onready var hand = %Hand
+@onready var healthbar = %Healthbar
 
 @export var regular_position: Vector3
 @export var ads_position: Vector3
+@export var max_health: float = 100
+@export var health: float = max_health
+
+var healthbar_current: float = 0
 
 var regular_fov = 70.0
 var ads_fov = 50.0
@@ -36,7 +41,8 @@ func _enter_tree():
 func _ready():
 	animation_tree.active = true
 	if not is_multiplayer_authority(): return
-	
+
+	healthbar.visible = true	
 	gun1st.visible = true
 	body.visible = false
 	gun3rd.visible = false
@@ -67,7 +73,10 @@ func _process(_delta):
 
 	animation_tree.set("parameters/aim_state/transition_request", "aiming" if is_aiming else "not_aiming")
 
-	if not is_multiplayer_authority(): return 
+	if not is_multiplayer_authority(): return
+
+	healthbar_current = lerp(healthbar_current, health / max_health, .5)
+	healthbar.material.set_shader_parameter("health", healthbar_current)
 
 	hand.rotation = lerp(hand.rotation,target_hand_rotation, .2)
 	target_hand_rotation = lerp(target_hand_rotation, Vector3(), .2)
