@@ -9,7 +9,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if conduits.all(func(c): c.state == Conduit.ConduitState.TEAM_ONE):
+	if conduits.all(func(c): c.state == Conduit.ConduitState.Green):
 		print("team one victory!")
-	elif conduits.all(func(c): c.state == Conduit.ConduitState.TEAM_ONE):
+	elif conduits.all(func(c): c.state == Conduit.ConduitState.Orange):
 		print("team two victory!")

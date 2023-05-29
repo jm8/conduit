@@ -1,6 +1,10 @@
 class_name Character extends CharacterBody3D
 
 const BulletHole = preload("res://bullet_hole.tscn")
+enum Team {
+	Orange,
+	Green
+}
 
 @onready var camera = %Camera
 @onready var camera_rotation = %CameraRotation
@@ -18,6 +22,7 @@ const BulletHole = preload("res://bullet_hole.tscn")
 @export var ads_position: Vector3
 @export var max_health: float = 100
 @export var health: float = max_health
+@export var team: Team
 
 var regular_damage = 10
 var regular_fov = 70.0
@@ -45,13 +50,18 @@ func _ready():
 	animation_tree.active = true
 	if not is_multiplayer_authority(): return
 
-	healthbar.visible = true	
+	healthbar.visible = true
 	gun1st.visible = true
 	body.visible = false
 	gun3rd.visible = false
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
+	
+	if randf() < 0.5:
+		team = Team.Orange
+	else:
+		team = Team.Green
 
 func _notification(what):
 	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
