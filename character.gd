@@ -1,5 +1,7 @@
 class_name Character extends CharacterBody3D
 
+const BulletHole = preload("res://bullet_hole.tscn")
+
 @onready var camera = %Camera
 @onready var camera_rotation = %CameraRotation
 @onready var camera_recoil = %CameraRecoil
@@ -106,6 +108,8 @@ func _process(_delta):
 				var hit = raycast.get_collider()
 				if hit is Character:
 					hit.take_damage.rpc(regular_damage)
+				else:
+					add_bullet_hole.rpc(raycast.global_position, raycast.get_collision_point(), raycast.get_collision_normal())
 			target_recoil += Vector3(.15 + randf_range(-0.05, 0.05), randf_range(-0.05, 0.05), 0)
 			play_fire_animation.rpc()
 		gun_animation_player.play("fire")
@@ -122,6 +126,13 @@ func take_damage(damage):
 	health -= damage
 	if health <= 0:
 		queue_free()
+
+@rpc("any_peer", "call_local")
+func add_bullet_hole(raycast_position, collision_point, collision_normal):
+	var decal = BulletHole.instantiate()
+	get_node("/root").add_child(decal)
+	decal.global_position = collision_point
+	decal.look_at(raycast_position, collision_point + collision_normal)
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
