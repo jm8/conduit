@@ -16,10 +16,13 @@ enum Team {
 @onready var gun1st = %Gun1st
 @onready var hand = %Hand
 @onready var raycast: RayCast3D = %RayCast
-@onready var status = %Status
+@onready var colission_shape_standing = $CollisionShapeStanding
+@onready var colission_shape_coruching = $CollisionShapeCrouching
 
 @export var regular_position: Vector3
 @export var ads_position: Vector3
+@export var stand_camera_position: Vector3
+@export var crouch_camera_position: Vector3
 @export var max_health: float = 100
 @export var health: float = max_health
 @export var team: Team:
@@ -44,9 +47,11 @@ var ads_fov = 50.0
 
 var target_recoil = Vector3()
 var target_hand_rotation = Vector3()
+var target_camera_position
 var healthbar_current: float = 0
 
 @export var is_aiming = false
+@export var is_crouching = false
 
 const SPEED = 12.0
 const JUMP_VELOCITY = 10
@@ -101,14 +106,19 @@ func _process(_delta):
 	# 		print(i, " ", Globulars.characters[i], " ", Globulars.characters[i].dead)
 	var local_velocity = transform.inverse().basis * velocity
 	animation_tree.set("parameters/run/blend_position", Vector2(local_velocity.x, local_velocity.z) / 4)
+	animation_tree.set("parameters/crouch/blend_position", Vector2(local_velocity.x, local_velocity.z) / 4)
 	var total_x_rotation = (camera_rotation.transform * camera_recoil.transform).basis.get_euler().x
 	animation_tree.set("parameters/look/blend_position", total_x_rotation / (PI/2))
 	if Input.is_action_just_pressed("pause"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	animation_tree.set("parameters/aim_state/transition_request", "aiming" if is_aiming else "not_aiming")
+	animation_tree.set("parameters/crouch_state/transition_request", "crouch" if is_crouching else "run")
 
 	healthbar_current = lerp(healthbar_current, health / max_health, .5)
+
+	colission_shape_standing.disabled = dead or is_crouching
+	colission_shape_coruching.disabled = dead or (not is_crouching)
 
 	if not is_multiplayer_authority(): return
 
@@ -135,6 +145,13 @@ func _process(_delta):
 		target_fov = regular_fov
 	hand.position = lerp(hand.position, target_hand_position, .5)
 	camera.fov = lerp(camera.fov, target_fov, 0.5)
+
+	is_crouching = Input.is_action_pressed("crouch")
+	if is_crouching:
+		target_camera_position = crouch_camera_position
+	else:
+		target_camera_position = stand_camera_position
+	camera_rotation.position = lerp(camera_rotation.position, target_camera_position, 0.3)
 	# if camera.fov == null:
 	# 	camera.fov = target_fov
 	# camera.fov = lerp(camera.fov, target_fov, .5)
@@ -189,7 +206,6 @@ func die():
 	dead = true
 	camera.current = false
 	visible = false
-	$CollisionShape3D.disabled = true
 	spectate_index = -1
 	change_spectate(1)
 	for c in Globulars.characters:
@@ -229,7 +245,9 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var current_speed = SPEED
-	if is_aiming:
+	if is_crouching:
+		current_speed /= 4
+	elif is_aiming:
 		current_speed /= 2
 	if direction:
 		velocity.x = lerp(velocity.x, direction.x * current_speed, LERP_VAL)
