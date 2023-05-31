@@ -14,7 +14,7 @@ func _process(_delta):
 	var character = Globulars.character if Globulars.character.visible else Globulars.character.spectate_character
 	if character:
 		healthbar.visible = true
-		healthbar.material.set_shader_parameter("health", Globulars.character.healthbar_current)
+		healthbar.material.set_shader_parameter("health", character.healthbar_current)
 		overheatbar.value = character.overheat
 		overheatbar.modulate = Color(0, 1, 1, character.overheat)
 		overheatbar.visible = true
