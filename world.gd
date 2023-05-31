@@ -32,12 +32,12 @@ func host(port):
 	host_ui.visible = true
 
 func _on_host_button_pressed():
-	var port = PORT if address_entry.text == "" else port_entry.text.to_int()
+	var port = PORT if port_entry.text == "" else port_entry.text.to_int()
 	host(port)
 	
 func _on_join_button_pressed():
 	var address = "localhost" if address_entry.text == "" else address_entry.text
-	var port = PORT if address_entry.text == "" else port_entry.text.to_int()
+	var port = PORT if port_entry.text == "" else port_entry.text.to_int()
 	Globulars.enet_peer.create_client(address, port)
 	print("connecting to ", address, ":", port)
 	multiplayer.multiplayer_peer = Globulars.enet_peer
