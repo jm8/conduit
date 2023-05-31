@@ -1,14 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5qfw16641iu4"]
+[gd_scene load_steps=8 format=3 uid="uid://b5qfw16641iu4"]
 
-[ext_resource type="Shader" path="res://conduit.gdshader" id="1_3nuwx"]
 [ext_resource type="Script" path="res://conduit.gd" id="1_pfv6c"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_45wi3"]
-render_priority = 0
-shader = ExtResource("1_3nuwx")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcrbu"]
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+emission_enabled = true
+emission = Color(1, 0.533333, 0, 1)
+emission_energy_multiplier = 16.0
+clearcoat_enabled = true
+clearcoat_roughness = 1.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_fy47u"]
-material = SubResource("ShaderMaterial_45wi3")
+material = SubResource("StandardMaterial3D_pcrbu")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hj5uf"]
 radius = 6.0
@@ -38,6 +41,8 @@ mesh = SubResource("TorusMesh_fy47u")
 script = ExtResource("1_pfv6c")
 
 [node name="Capture Area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Capture Area"]
 shape = SubResource("SphereShape3D_hj5uf")
