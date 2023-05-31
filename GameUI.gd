@@ -16,7 +16,7 @@ func _process(_delta):
 		healthbar.visible = true
 		healthbar.material.set_shader_parameter("health", character.healthbar_current)
 		overheatbar.value = character.overheat
-		overheatbar.modulate = Color(0, 1, 1, character.overheat)
+		overheatbar.modulate = Color(0, 1, 1, 0.5)
 		overheatbar.visible = true
 	else:
 		healthbar.visible = false
