@@ -33,10 +33,11 @@ func _process(delta):
 	
 	if orange_capture_progress > CAPTURE_TARGET:
 		state = ConduitState.Orange
-		mesh.surface_get_material(0).emission = Color(1, 0.5, 1);
+		mesh.surface_get_material(0).set_shader_parameter("capture_color", Color(1, 0, 0));
 	if green_capture_progress > CAPTURE_TARGET:
 		state = ConduitState.Green
-		mesh.surface_get_material(0).emission = Color(0, 1, 0);
+		mesh.surface_get_material(0).set_shader_parameter("capture_color", Color(0, 1, 0));
+	mesh.surface_get_material(0).set_shader_parameter("capture_progress", TAU * max(orange_capture_progress, green_capture_progress) / CAPTURE_TARGET)
 
 func _on_capture_area_body_entered(body):
 	var team = body.get("team")
