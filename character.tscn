@@ -67,14 +67,65 @@ properties/15/sync = true
 properties/16/path = NodePath("../../CameraRotation:position")
 properties/16/spawn = true
 properties/16/sync = true
+properties/17/path = NodePath("../..:healthbar_current")
+properties/17/spawn = true
+properties/17/sync = true
 
 [sub_resource type="Animation" id="Animation_822gb"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Gun1st:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Gun1st:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_o3v1q"]
 resource_name = "fire"
 length = 0.08
 step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Gun1st:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.03), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Gun1st:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0), Vector3(-0.0261799, -3.14159, 0), Vector3(0, -3.14159, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4vrbc"]
 _data = {
@@ -8843,7 +8894,6 @@ filter_enabled = true
 filters = ["Armature/Skeleton3D:ElbowPoleTarget.L", "Armature/Skeleton3D:ElbowPoleTarget.R", "Armature/Skeleton3D:HandIK.L", "Armature/Skeleton3D:HandIK.R", "Armature/Skeleton3D:LowerArm.L", "Armature/Skeleton3D:LowerArm.R", "Armature/Skeleton3D:LowerHand.L", "Armature/Skeleton3D:LowerThumb.L", "Armature/Skeleton3D:LowerThumb.R", "Armature/Skeleton3D:Shoulder.L", "Armature/Skeleton3D:Shoulder.R", "Armature/Skeleton3D:UpperArm.L", "Armature/Skeleton3D:UpperArm.R", "Armature/Skeleton3D:UpperHand.L", "Armature/Skeleton3D:UpperHand.R", "Armature/Skeleton3D:UpperThumb.L"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_lcyba"]
-graph_offset = Vector2(-73.1622, -50.7966)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_hdbdu")
 nodes/Animation/position = Vector2(120, 420)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_0u1cj")
@@ -8926,7 +8976,7 @@ libraries = {
 
 [node name="Gun1st" parent="CameraRotation/CameraRecoil/Camera/Hand" instance=ExtResource("2_uaof0")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 visible = false
 
 [node name="Armature" type="Node3D" parent="."]
@@ -9230,7 +9280,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_lcyba")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 root_motion_track = NodePath("Armature/Skeleton3D:Root")
 parameters/aim_fire/active = false
 parameters/aim_fire/request = 0

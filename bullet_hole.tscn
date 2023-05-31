@@ -72,7 +72,7 @@ modulate = Color(0, 1, 0, 1)
 script = ExtResource("2_bv31d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-speed_scale = 0.05
+speed_scale = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_b4r3j")
 }

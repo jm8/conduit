@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c81inu7s31i64"]
+[gd_scene load_steps=7 format=3 uid="uid://c81inu7s31i64"]
 
 [ext_resource type="Script" path="res://GameUI.gd" id="1_da8w7"]
 [ext_resource type="Shader" path="res://healthbar.gdshader" id="2_mbf2k"]
 [ext_resource type="PackedScene" uid="uid://dwwjqaqsllu44" path="res://minimap.tscn" id="3_dojqr"]
+[ext_resource type="Texture2D" uid="uid://djyx3qod741dw" path="res://assets/circle.png" id="4_mxepm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tkd4q"]
 shader = ExtResource("2_mbf2k")
@@ -51,3 +52,25 @@ offset_bottom = 542.0
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(0.5, 0.5)
+
+[node name="OverheatBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0, 1, 1, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -67.0
+offset_right = 100.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.0
+value = 1.0
+fill_mode = 4
+texture_progress = ExtResource("4_mxepm")
+radial_initial_angle = 315.0
+radial_fill_degrees = 90.0

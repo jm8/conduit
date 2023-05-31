@@ -25,6 +25,8 @@ enum Team {
 @export var crouch_camera_position: Vector3
 @export var max_health: float = 100
 @export var health: float = max_health
+@export var overheat: float = 0
+@export var overheated: bool = false
 @export var team: Team:
 	set(new_team):
 		team = new_team
@@ -48,7 +50,7 @@ var ads_fov = 50.0
 var target_recoil = Vector3()
 var target_hand_rotation = Vector3()
 var target_camera_position
-var healthbar_current: float = 0
+@export var healthbar_current: float = 0
 
 @export var is_aiming = false
 @export var is_crouching = false
@@ -73,12 +75,7 @@ func _ready():
 	if not is_multiplayer_authority(): return
 	make_first_person()
 
-	gun1st.visible = true
-	body.visible = false
-	gun3rd.visible = false
-
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	camera.current = true
 	
 	if randf() < 0.5:
 		team = Team.Orange
@@ -99,7 +96,7 @@ func _unhandled_input(event):
 		camera_rotation.rotation.x += -event.relative.y * .005
 		camera_rotation.rotation.x = clamp(-PI/2, camera_rotation.rotation.x, PI/2)
 
-func _process(_delta):
+func _process(delta):
 	# if dead:
 	# 	print("\n", "spectate_index=", spectate_index)
 	# 	for i in range(len(Globulars.characters)):
@@ -156,7 +153,10 @@ func _process(_delta):
 	# 	camera.fov = target_fov
 	# camera.fov = lerp(camera.fov, target_fov, .5)
 
-	if Input.is_action_pressed("fire"):
+	if not overheated and Input.is_action_pressed("fire"):
+		if overheat >= 1:
+			overheated = true			
+		overheat += .2 * delta
 		if not gun_animation_player.is_playing():
 			if raycast.is_colliding():
 				var hit = raycast.get_collider()
@@ -166,8 +166,12 @@ func _process(_delta):
 					add_bullet_hole.rpc(team, raycast.global_position, raycast.get_collision_point(), raycast.get_collision_normal())
 			target_recoil += Vector3(.15 + randf_range(-0.05, 0.05), randf_range(-0.05, 0.05), 0)
 			play_fire_animation.rpc()
-		gun_animation_player.play("fire")
-	else:
+			gun_animation_player.play("fire")
+	if overheated or not Input.is_action_pressed("fire"):
+		overheat -= .5 * delta
+		if overheat <= 0:
+			overheat = 0
+			overheated = false
 		camera.transform.origin = Vector3()
 
 @rpc
@@ -195,12 +199,14 @@ func make_third_person():
 	gun3rd.visible = true
 	body.visible = true
 	camera.current = false
+	print(multiplayer.get_unique_id(),": ", "made ", name, " third person")
 
 func make_first_person():
 	gun1st.visible = true
 	gun3rd.visible = false
 	body.visible = false
 	camera.current = true
+	print(multiplayer.get_unique_id(),": ", "made ", name, " first person")
 
 func die():
 	dead = true
