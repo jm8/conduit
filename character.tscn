@@ -70,6 +70,9 @@ properties/16/sync = true
 properties/17/path = NodePath("../..:healthbar_current")
 properties/17/spawn = true
 properties/17/sync = true
+properties/18/path = NodePath("../..:overheat")
+properties/18/spawn = true
+properties/18/sync = true
 
 [sub_resource type="Animation" id="Animation_822gb"]
 length = 0.001
