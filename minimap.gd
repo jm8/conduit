@@ -50,13 +50,16 @@ func _process(delta):
 		conduit_sprite.position = Vector2(normalized_position.x * $background.size.x, 
 		normalized_position.y * $background.size.y) + $background.position
 	
-	if Globulars.character != null:
-		var pos = Globulars.character.global_position
+	var character = Globulars.character
+	if character != null and character.dead:
+		character = character.spectate_character
+	if character != null:
+		var pos = character.global_position
 		var normalized_position: Vector2 = Vector2((pos.x - map_aabb.position.x) / map_aabb.size.x,
 			(pos.z - map_aabb.position.z) / map_aabb.size.z)
 		player_sprite.position = Vector2(normalized_position.x * $background.size.x, 
 			normalized_position.y * $background.size.y) + $background.position
-		player_sprite.rotation = -Globulars.character.global_rotation.y
+		player_sprite.rotation = -character.global_rotation.y
 		player_sprite.visible = true
 	else:
 		player_sprite.visible = false
