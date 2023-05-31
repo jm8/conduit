@@ -16,7 +16,6 @@ var orange_capture_progress: float = 0
 var green_capture_progress: float = 0
 
 @export var CAPTURE_TARGET: int = 10
-@export var nexts: Array[Conduit]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -36,7 +36,7 @@ emission_energy_multiplier = 15.0
 [sub_resource type="SphereMesh" id="SphereMesh_rlo7b"]
 material = SubResource("StandardMaterial3D_io4bk")
 
-[node name="conduit" type="MeshInstance3D"]
+[node name="conduit" type="MeshInstance3D" groups=["conduits"]]
 mesh = SubResource("TorusMesh_fy47u")
 script = ExtResource("1_pfv6c")
 
