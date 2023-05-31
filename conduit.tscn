@@ -38,6 +38,8 @@ mesh = SubResource("TorusMesh_fy47u")
 script = ExtResource("1_pfv6c")
 
 [node name="Capture Area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Capture Area"]
 shape = SubResource("SphereShape3D_hj5uf")

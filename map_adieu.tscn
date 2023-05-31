@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bub74vuvsifwg"]
+[gd_scene load_steps=27 format=3 uid="uid://bub74vuvsifwg"]
 
 [ext_resource type="PackedScene" uid="uid://b5qfw16641iu4" path="res://conduit.tscn" id="1_3kynv"]
 [ext_resource type="PackedScene" uid="uid://cpy1he7q2plea" path="res://assets/buildings/barrier_sides.tscn" id="3_6f0eo"]
@@ -27,6 +27,9 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2wqvh"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qkb1x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s5idd"]
+size = Vector3(16.3391, 25.1064, 16.1785)
 
 [node name="Half Map Adieu" type="StaticBody3D"]
 
@@ -163,6 +166,12 @@ transform = Transform3D(0.25, 0, -2.18557e-08, 0, -0.25, 0, 2.18557e-08, 0, 0.25
 
 [node name="building-l2" parent="buildings/small-tower2" instance=ExtResource("22_hqyjp")]
 transform = Transform3D(-0.25, 0, 0, 0, -0.25, 0, 0, 0, -0.25, -0.655823, 0.584204, 0.688522)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="buildings/small-tower2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="buildings/small-tower2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02948, 3.28963, -0.000602722)
+shape = SubResource("BoxShape3D_s5idd")
 
 [node name="building-l3" parent="." instance=ExtResource("13_3mu0k")]
 transform = Transform3D(-0.122305, 0, -0.158245, 0, 0.2, 0, 0.158245, 0, -0.122305, -49.7793, -0.651246, 26.6347)
