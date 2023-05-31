@@ -156,7 +156,7 @@ func _process(delta):
 	if not overheated and Input.is_action_pressed("fire"):
 		if overheat >= 1:
 			overheated = true			
-		overheat += .2 * delta
+		overheat += (1/3.0) * delta
 		if not gun_animation_player.is_playing():
 			if raycast.is_colliding():
 				var hit = raycast.get_collider()
