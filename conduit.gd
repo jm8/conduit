@@ -24,21 +24,21 @@ func _process(delta):
 	if orange_players > 0 and green_players == 0:
 		orange_capture_progress += delta * orange_players
 		green_capture_progress = 0
+		set_instance_shader_parameter("capture_color", Color(1, 0, 0));
 	if green_players > 0 and orange_players == 0:
 		green_capture_progress += delta * green_players
 		orange_capture_progress = 0
+		set_instance_shader_parameter("capture_color", Color(0, 1, 0));
 	if green_players == 0 and orange_players == 0:
 		orange_capture_progress = 0
 		green_capture_progress = 0
 	
 	if orange_capture_progress > CAPTURE_TARGET:
 		state = ConduitState.Orange
-		#mesh.surface_get_material(0).set_shader_parameter("capture_color", Color(1, 0, 0));
 	if green_capture_progress > CAPTURE_TARGET:
 		state = ConduitState.Green
-		#mesh.surface_get_material(0).set_shader_parameter("capture_color", Color(0, 1, 0));
-		
-	mesh.surface_get_material(0).set_shader_parameter("capture_progress", max(orange_capture_progress, green_capture_progress) / CAPTURE_TARGET)
+
+	set_instance_shader_parameter("capture_progress", max(orange_capture_progress, green_capture_progress) / CAPTURE_TARGET)
 
 func _on_capture_area_body_entered(body):
 	var team = body.get("team")
