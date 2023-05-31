@@ -64,7 +64,6 @@ func _process(delta):
 	var conduits_adjacency = Globulars.world.get_node("Map").conduits_adjacency
 	var conduits = Globulars.world.get_node("Map").conduits
 	for i in range(0, conduits_adjacency.size(), 2):
-			print(i)
 			var c1 = conduits[conduits_adjacency[i]]
 			var c2 = conduits[conduits_adjacency[i + 1]]
 		
@@ -83,5 +82,4 @@ func _process(delta):
 				l.default_color = Color(0, 1, 0)
 			else:
 				l.default_color = Color(0.75, 0.75, 0.75)
-			print(l)
 			$background.add_child(l)

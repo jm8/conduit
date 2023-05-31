@@ -8961,7 +8961,7 @@ far = 1000.0
 
 [node name="RayCast" type="RayCast3D" parent="CameraRotation/CameraRecoil/Camera"]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -100)
+target_position = Vector3(0, 0, -400)
 collision_mask = 3
 
 [node name="Hand" type="Node3D" parent="CameraRotation/CameraRecoil/Camera"]
