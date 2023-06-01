@@ -43,7 +43,6 @@ func _process(delta):
 			green_capture_progress = 0
 			state = ConduitState.Neutral
 	elif state == ConduitState.Orange:
-		print("orange state")
 		if green_players > 0 and orange_players == 0:
 			orange_capture_progress -= delta * green_players
 		else:
@@ -61,13 +60,13 @@ func _process(delta):
 func _on_capture_area_body_entered(body):
 	var team = body.get("team")
 	if team == Character.Team.Orange:
-		green_players += 1
+		orange_players += 1
 	elif team == Character.Team.Green:
 		green_players += 1
 
 func _on_capture_area_body_exited(body):
 	var team = body.get("team")
 	if team == Character.Team.Orange:
-		green_players -= 1
+		orange_players -= 1
 	elif team == Character.Team.Green:
 		green_players -= 1

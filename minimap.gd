@@ -49,6 +49,12 @@ func _process(delta):
 		(pos.z - map_aabb.position.z) / map_aabb.size.z)
 		conduit_sprite.position = Vector2(normalized_position.x * $background.size.x, 
 		normalized_position.y * $background.size.y) + $background.position
+		if conduit_nodes[i].state == Conduit.ConduitState.Neutral:
+			conduit_sprite.modulate = Color(1.0, 1.0, 1.0)
+		elif conduit_nodes[i].state == Conduit.ConduitState.Orange:
+			conduit_sprite.modulate = Color(1.0, 0.0, 0.0)
+		elif conduit_nodes[i].state == Conduit.ConduitState.Green:
+			conduit_sprite.modulate = Color(0.0, 1.0, 0.0)
 	
 	var character = Globulars.character
 	if character != null and character.dead:
@@ -77,12 +83,12 @@ func _process(delta):
 			
 			l.add_point(cs1.position)
 			l.add_point(cs2.position)
-			
+			l.width = 4
 			
 			if c1.state == Conduit.ConduitState.Orange and c2.state == Conduit.ConduitState.Orange:
-				l.default_color = Color(1, 0.5, 1)
+				l.default_color = Color(0.75, 0, 0)
 			elif c1.state == Conduit.ConduitState.Green and c2.state == Conduit.ConduitState.Green:
-				l.default_color = Color(0, 1, 0)
+				l.default_color = Color(0, 0.75, 0)
 			else:
 				l.default_color = Color(0.75, 0.75, 0.75)
 			$background.add_child(l)

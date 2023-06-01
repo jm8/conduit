@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdqgwlp4n2c67"]
 
-[ext_resource type="Texture2D" uid="uid://c5rfr30112vau" path="res://assets/L.png" id="1_8tfkg"]
+[ext_resource type="Texture2D" uid="uid://cmfyx4fxwhjbp" path="res://assets/conduit_sprite.png" id="1_p04h2"]
 
 [node name="conduit_sprite" type="Sprite2D"]
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_8tfkg")
+texture = ExtResource("1_p04h2")
