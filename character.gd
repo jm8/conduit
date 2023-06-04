@@ -15,6 +15,7 @@ enum Team {
 @onready var gun3rd = %Gun3rd
 @onready var gun1st = %Gun1st
 @onready var hand = %Hand
+@onready var player_name_label = %PlayerNameLabel
 @onready var raycast: RayCast3D = %RayCast
 @onready var colission_shape_standing = $CollisionShapeStanding
 @onready var colission_shape_coruching = $CollisionShapeCrouching
@@ -117,6 +118,8 @@ func _process(delta):
 	colission_shape_standing.disabled = dead or is_crouching
 	colission_shape_coruching.disabled = dead or (not is_crouching)
 
+	player_name_label.text = name
+
 	if not is_multiplayer_authority(): return
 
 	if dead:
@@ -199,6 +202,7 @@ func make_third_person():
 	gun3rd.visible = true
 	body.visible = true
 	camera.current = false
+	player_name_label.visible = true
 	print(multiplayer.get_unique_id(),": ", "made ", name, " third person")
 
 func make_first_person():
@@ -206,6 +210,7 @@ func make_first_person():
 	gun3rd.visible = false
 	body.visible = false
 	camera.current = true
+	player_name_label.visible = false
 	print(multiplayer.get_unique_id(),": ", "made ", name, " first person")
 
 func die():
