@@ -38,7 +38,7 @@ func _process(delta):
 		if orange_players > 0 and green_players == 0:
 			green_capture_progress -= delta * orange_players
 		else:
-			green_capture_progress += delta * (1 + green_players)
+			green_capture_progress = min(CAPTURE_TARGET, green_capture_progress +  delta * (1 + green_players))
 		if green_capture_progress < 0:
 			green_capture_progress = 0
 			state = ConduitState.Neutral
@@ -46,7 +46,7 @@ func _process(delta):
 		if green_players > 0 and orange_players == 0:
 			orange_capture_progress -= delta * green_players
 		else:
-			orange_capture_progress += delta * (1 + green_players)
+			orange_capture_progress = min(CAPTURE_TARGET, orange_capture_progress + delta * (1 + green_players))
 		if orange_capture_progress < 0:
 			orange_capture_progress = 0
 			state = ConduitState.Neutral
