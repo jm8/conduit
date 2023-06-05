@@ -12,6 +12,9 @@ var characters: Array[Character]
 
 var gameui: GameUI
 
+var winning_team
+var character_team
+
 func update_characters():
 	var new_characters: Array[Character] = []
 	for i in range(world.get_child_count()):

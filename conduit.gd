@@ -7,15 +7,13 @@ enum ConduitState {
 	Green,
 }
 
-const capture_time: float = 10
+const capture_time: float = 1
 
 var green_players: int = 0
 var orange_players: int = 0
 var state: ConduitState = ConduitState.Neutral
 var orange_capture_progress: float = 0
 var green_capture_progress: float = 0
-
-@export var CAPTURE_TARGET: int = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -38,7 +36,7 @@ func _process(delta):
 		if orange_players > 0 and green_players == 0:
 			green_capture_progress -= delta * orange_players
 		else:
-			green_capture_progress = min(CAPTURE_TARGET, green_capture_progress +  delta * (1 + green_players))
+			green_capture_progress = min(capture_time, green_capture_progress +  delta * (1 + green_players))
 		if green_capture_progress < 0:
 			green_capture_progress = 0
 			state = ConduitState.Neutral
@@ -46,12 +44,12 @@ func _process(delta):
 		if green_players > 0 and orange_players == 0:
 			orange_capture_progress -= delta * green_players
 		else:
-			orange_capture_progress = min(CAPTURE_TARGET, orange_capture_progress + delta * (1 + green_players))
+			orange_capture_progress = min(capture_time, orange_capture_progress + delta * (1 + green_players))
 		if orange_capture_progress < 0:
 			orange_capture_progress = 0
 			state = ConduitState.Neutral
 		
-	set_instance_shader_parameter("capture_progress", max(orange_capture_progress, green_capture_progress) / CAPTURE_TARGET)
+	set_instance_shader_parameter("capture_progress", max(orange_capture_progress, green_capture_progress) / capture_time)
 	if orange_capture_progress > green_capture_progress:
 		set_instance_shader_parameter("capture_color", Color(1.0, 0.0, 0.0))
 	else:

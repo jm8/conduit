@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnuetj23ypdhr"]
+
+[ext_resource type="Script" path="res://EndGameScreen.gd" id="1_axbsu"]
+[ext_resource type="PackedScene" uid="uid://b5qfw16641iu4" path="res://conduit.tscn" id="1_ghwat"]
+[ext_resource type="Texture2D" uid="uid://cjc8ithy0yirs" path="res://assets/nightskycolor.png" id="2_ytd3a"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c3nv0"]
+size = Vector2(200, 200)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_rb2w5"]
+panorama = ExtResource("2_ytd3a")
+
+[sub_resource type="Sky" id="Sky_0q1ol"]
+sky_material = SubResource("PanoramaSkyMaterial_rb2w5")
+
+[sub_resource type="Environment" id="Environment_4g228"]
+background_mode = 2
+background_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_0q1ol")
+ambient_light_source = 2
+ambient_light_color = Color(0.811765, 1, 1, 1)
+ambient_light_energy = 0.0
+ssao_enabled = true
+sdfgi_cascades = 8
+sdfgi_min_cell_size = 0.1
+sdfgi_cascade0_distance = 6.4
+sdfgi_max_distance = 1638.4
+sdfgi_y_scale = 2
+sdfgi_energy = 0.1
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.1
+glow_bloom = 1.0
+glow_blend_mode = 0
+fog_density = 0.001
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_axbsu")
+
+[node name="conduit" parent="." instance=ExtResource("1_ghwat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="conduit2" parent="." instance=ExtResource("1_ghwat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_c3nv0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.74988, 0.661574, 0, -0.661574, 0.74988, -4.76837e-07, 3.98593, 4.16786)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4g228")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 18.4555, 0)
+light_energy = 0.2
+light_angular_distance = 1.0
+shadow_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 144
+horizontal_alignment = 1
+vertical_alignment = 1

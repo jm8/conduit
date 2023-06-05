@@ -8,13 +8,13 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jbupk"]
 panorama = ExtResource("2_6cefc")
 
-[sub_resource type="Sky" id="Sky_0q1ol"]
+[sub_resource type="Sky" id="Sky_fyw3p"]
 sky_material = SubResource("PanoramaSkyMaterial_jbupk")
 
 [sub_resource type="Environment" id="Environment_yc6vh"]
 background_mode = 2
 background_color = Color(1, 1, 1, 1)
-sky = SubResource("Sky_0q1ol")
+sky = SubResource("Sky_fyw3p")
 ambient_light_source = 2
 ambient_light_color = Color(0.811765, 1, 1, 1)
 ambient_light_energy = 0.0

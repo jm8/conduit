@@ -12,6 +12,7 @@ extends Node3D
 	7, 8
 ]
 
+@onready var end_screen = preload("res://EndGameScreen.tscn").instantiate()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,7 +21,22 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if conduits.all(func(c): c.state == Conduit.ConduitState.Green):
-		print("team one victory!")
-	elif conduits.all(func(c): c.state == Conduit.ConduitState.Orange):
-		print("team two victory!")
+	var green_win = true
+	var red_win = true
+	for c in conduits:
+		if c.state != Conduit.ConduitState.Green:
+			green_win = false
+		if c.state != Conduit.ConduitState.Orange:
+			red_win = false
+	
+	if green_win && Globulars.character != null:
+		Globulars.winning_team = Character.Team.Green
+		Globulars.character_team = Globulars.character.team
+		get_tree().get_root().add_child(end_screen)
+		get_tree().get_root().get_node("World").queue_free()
+		
+	elif red_win && Globulars.character != null:
+		Globulars.winning_team = Character.Team.Orange
+		Globulars.character_team = Globulars.character.team
+		get_tree().get_root().add_child(end_screen)
+		get_tree().get_root().get_node("World").queue_free()
