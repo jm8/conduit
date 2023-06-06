@@ -58,6 +58,10 @@ var target_camera_position
 
 @export var is_aiming = false
 @export var is_crouching = false
+@export var orange_spawn_position = Vector3(0, 0, -85)
+@export var green_spawn_position = Vector3(0, 0, 85)
+@export var orange_spawn_rotation = Vector3(0, 0, 0)
+@export var green_spawn_rotation = Vector3(0, TAU/2,0)
 
 const SPEED = 12.0
 const JUMP_VELOCITY = 10
@@ -81,11 +85,7 @@ func _ready():
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	if randf() < 0.5:
-		team = Team.Orange
-	else:
-		team = Team.Green
-
+	global_position = orange_spawn_position if team == Team.Orange else green_spawn_position
 
 func _notification(what):
 	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
@@ -217,6 +217,7 @@ func make_first_person():
 	print(multiplayer.get_unique_id(), ": ", "made ", name, " first person")
 
 func die():
+	global_position = Vector3(1000, 1000, 1000)
 	dead = true
 	camera.current = false
 	visible = false
@@ -233,6 +234,9 @@ func die():
 	spectate_index = -1
 	spectate_character.make_third_person()
 	spectate_character = null
+	global_position = orange_spawn_position if team == Team.Orange else green_spawn_position
+	global_rotation = orange_spawn_rotation if team == Team.Orange else green_spawn_rotation
+	global_rotation = Vector3()
 	make_first_person()
 	for c in Globulars.characters:
 		c.brodcast_respawn.rpc(name)
