@@ -75,3 +75,4 @@ replication_config = SubResource("SceneReplicationConfig_x8cri")
 
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/HBoxContainer/GreenTeamList" to="." method="_on_green_team_list_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/HBoxContainer/RedTeamList" to="." method="_on_red_team_list_gui_input"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
