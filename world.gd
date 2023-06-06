@@ -26,8 +26,8 @@ func host(port):
 	Globulars.enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = Globulars.enet_peer
 	print("Starting server on *:", port)
-	multiplayer.peer_connected.connect(add_player)
-	multiplayer.peer_disconnected.connect(remove_player)
+#	multiplayer.peer_connected.connect(add_player)
+#	multiplayer.peer_disconnected.connect(remove_player)
 	menu.queue_free()
 	host_ui.visible = true
 
@@ -41,13 +41,20 @@ func _on_join_button_pressed():
 	Globulars.enet_peer.create_client(address, port)
 	print("connecting to ", address, ":", port)
 	multiplayer.multiplayer_peer = Globulars.enet_peer
-	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_connected.connect(enter_setup_screen)
 	menu.queue_free()
-	var ui = GameUIScene.instantiate()
-	add_child(ui)
+	
+	
+	
+#	var ui = GameUIScene.instantiate()
+#	add_child(ui)
+
+func enter_setup_screen(peer_id):
+	%SetupScreen.visible = true
 
 func add_player(peer_id):
 	print(peer_id)
+	print("HELLO")
 	if peer_id == 1:
 		return
 	var character = CharacterScene.instantiate()

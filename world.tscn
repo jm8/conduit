@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxdc5xrxfbvhl"]
+[gd_scene load_steps=5 format=3 uid="uid://dxdc5xrxfbvhl"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_q1htd"]
 [ext_resource type="PackedScene" uid="uid://dan0jsoywmgi4" path="res://full_map_adieu.tscn" id="2_rfbg5"]
+[ext_resource type="PackedScene" uid="uid://x67q6scvjr2n" path="res://gamesetupscreen.tscn" id="3_skmex"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02ltk"]
 bg_color = Color(0, 0, 0, 1)
@@ -93,6 +94,12 @@ vertical_alignment = 1
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://character.tscn")
 spawn_path = NodePath("..")
+
+[node name="SetupScreen" type="CanvasLayer" parent="."]
+
+[node name="SetupScreen" parent="SetupScreen" instance=ExtResource("3_skmex")]
+unique_name_in_owner = true
+visible = false
 
 [connection signal="pressed" from="MainMenu/Menu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="MainMenu/Menu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

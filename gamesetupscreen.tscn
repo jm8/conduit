@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://x67q6scvjr2n"]
+
+[ext_resource type="Script" path="res://gamesetupscreen.gd" id="1_0ut3y"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_x8cri"]
+properties/0/path = NodePath(".:green_team")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:red_team")
+properties/1/spawn = true
+properties/1/sync = true
+
+[node name="Control" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0715, 0.08905, 0.13, 1)
+script = ExtResource("1_0ut3y")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GreenTeamList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GreenTeamList"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Join Green Team"
+horizontal_alignment = 1
+
+[node name="RedTeamList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RedTeamList"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Join Red Team"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_font_sizes/font_size = 48
+text = "Ready"
+alignment = 2
+icon_alignment = 2
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_x8cri")
+
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/HBoxContainer/GreenTeamList" to="." method="_on_green_team_list_gui_input"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/HBoxContainer/RedTeamList" to="." method="_on_red_team_list_gui_input"]
