@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5qfw16641iu4"]
+[gd_scene load_steps=10 format=3 uid="uid://b5qfw16641iu4"]
 
 [ext_resource type="Shader" path="res://conduit.gdshader" id="1_3nuwx"]
 [ext_resource type="Script" path="res://conduit.gd" id="1_pfv6c"]
@@ -33,11 +33,29 @@ emission_energy_multiplier = 15.0
 [sub_resource type="SphereMesh" id="SphereMesh_rlo7b"]
 material = SubResource("StandardMaterial3D_io4bk")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4p1c1"]
+properties/0/path = NodePath(".:green_players")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:orange_players")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath(".:state")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:orange_capture_progress")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath(".:green_capture_progress")
+properties/4/spawn = true
+properties/4/sync = true
+
 [node name="conduit" type="MeshInstance3D" groups=["conduits"]]
 mesh = SubResource("TorusMesh_fy47u")
 script = ExtResource("1_pfv6c")
 
 [node name="Capture Area" type="Area3D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Capture Area"]
 shape = SubResource("SphereShape3D_hj5uf")
@@ -45,6 +63,9 @@ shape = SubResource("SphereShape3D_hj5uf")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_lwq5u")
 draw_pass_1 = SubResource("SphereMesh_rlo7b")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4p1c1")
 
 [connection signal="body_entered" from="Capture Area" to="." method="_on_capture_area_body_entered"]
 [connection signal="body_exited" from="Capture Area" to="." method="_on_capture_area_body_exited"]
