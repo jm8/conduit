@@ -28,15 +28,7 @@ enum Team {
 @export var health: float = max_health
 @export var overheat: float = 0
 @export var overheated: bool = false
-@export var team: Team:
-	set(new_team):
-		team = new_team
-		var light_material = green_material if team == Team.Green else orange_material
-		body.set_surface_override_material(1, light_material)
-		gun1st.light_material = light_material
-		gun3rd.light_material = light_material
-	get:
-		return team
+@export var team: Team
 @export var dead = false
 @export var orange_material: ORMMaterial3D
 @export var green_material: ORMMaterial3D
@@ -80,12 +72,18 @@ func _ready():
 	animation_tree.active = true
 	make_third_person()
 
+	var light_material = green_material if team == Team.Green else orange_material
+	body.set_surface_override_material(1, light_material)
+	gun1st.light_material = light_material
+	gun3rd.light_material = light_material
+
 	if not is_multiplayer_authority(): return
 	make_first_person()
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	global_position = orange_spawn_position if team == Team.Orange else green_spawn_position
+		
 
 func _notification(what):
 	if what == NOTIFICATION_APPLICATION_FOCUS_IN:

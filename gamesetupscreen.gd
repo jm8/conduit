@@ -6,6 +6,10 @@ extends ColorRect
 @export var red_team = []
 @export var ready_players = []
 
+const GameUIScene = preload("res://game_ui.tscn")
+
+var added_to_team = false
+
 @rpc("any_peer")
 func add_green_player():
 	var player_id = multiplayer.get_remote_sender_id();
@@ -30,13 +34,13 @@ func add_red_player():
 		_: 
 			green_team.remove_at(green_team.find(player_id))
 
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func ready():
 	var player_id = multiplayer.get_remote_sender_id();
 	if ready_players.find(player_id) == -1:
 		ready_players.append(player_id)
 
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func unready():
 	var player_id = multiplayer.get_remote_sender_id();
 	if ready_players.find(player_id) != -1:
@@ -44,10 +48,12 @@ func unready():
 
 func _on_green_team_list_gui_input(event: InputEvent):
 	if event.is_action_pressed("fire"):
+		added_to_team = true
 		add_green_player.rpc()
 
 func _on_red_team_list_gui_input(event):
 	if event.is_action_pressed("fire"):
+		added_to_team = true
 		add_red_player.rpc()
 
 func _process(delta):
@@ -66,15 +72,31 @@ func _process(delta):
 		var name_label = name_label_scene.instantiate();
 		name_label.text = str(player)
 		%GreenTeamList.add_child(name_label)
+	
 	var all_ready = true
-	for player in ready_players:
-		if red_team.find(player) == -1 and green_team.find(player) == -1:
+	
+	for player in red_team:
+		if ready_players.find(player) == -1:
 			all_ready = false
-	if all_ready:
-		pass
-
+	for player in green_team:
+		if ready_players.find(player) == -1:
+			all_ready = false
+			
+	if all_ready and ready_players.size() > 0:
+		for c in red_team:
+			Globulars.world.add_player(c, Character.Team.Orange)
+		for c in green_team:
+			Globulars.world.add_player(c, Character.Team.Green)
+		print("removing parent")
+		var ui = GameUIScene.instantiate()
+		Globulars.world.add_child(ui)
+		get_parent().visible = false
+		get_parent().queue_free()
+		
 
 func _on_check_button_toggled(button_pressed):
+	if !added_to_team:
+		return
 	if button_pressed:
 		ready.rpc()
 	else:

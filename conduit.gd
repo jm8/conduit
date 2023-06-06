@@ -56,7 +56,6 @@ func _process(delta):
 		set_instance_shader_parameter("capture_color", Color(0.0, 1.0, 0.0))
 
 func _on_capture_area_body_entered(body):
-	print("capture area entered")
 	var team = body.get("team")
 	if team == Character.Team.Orange:
 		orange_players += 1
@@ -66,7 +65,6 @@ func _on_capture_area_body_entered(body):
 func _on_capture_area_body_exited(body):
 	if not (body is Character):
 		return
-	print("capture area exited")
 	var team = body.get("team")
 	if team == Character.Team.Orange:
 		orange_players -= 1

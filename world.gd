@@ -46,19 +46,17 @@ func _on_join_button_pressed():
 	
 	
 	
-#	var ui = GameUIScene.instantiate()
-#	add_child(ui)
+
 
 func enter_setup_screen(peer_id):
 	%SetupScreen.visible = true
 
-func add_player(peer_id):
-	print(peer_id)
-	print("HELLO")
+func add_player(peer_id, team):
 	if peer_id == 1:
 		return
 	var character = CharacterScene.instantiate()
 	character.name = str(peer_id)
+	character.team = team
 	add_child(character)
 
 func remove_player(peer_id):
