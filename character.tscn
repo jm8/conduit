@@ -73,6 +73,12 @@ properties/17/sync = true
 properties/18/path = NodePath("../..:overheat")
 properties/18/spawn = true
 properties/18/sync = true
+properties/19/path = NodePath("../..:respawn_start_time")
+properties/19/spawn = true
+properties/19/sync = true
+properties/20/path = NodePath("../..:respawn_timer")
+properties/20/spawn = true
+properties/20/sync = true
 
 [sub_resource type="Animation" id="Animation_822gb"]
 length = 0.001
@@ -9258,7 +9264,7 @@ bones/37/rotation = Quaternion(0.557835, 0.434535, 0.557835, 0.434535)
 bones/37/scale = Vector3(1, 1, 1)
 
 [node name="Camera_2" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(-0.994521, 0.0965768, -0.0400029, 0.0965768, 0.995324, 0.00193698, 0.0400029, -0.00193698, -0.999198, 0.0502588, 1.74403, 0.0224828)
+transform = Transform3D(-0.994521, 0.0965768, -0.040003, 0.0965768, 0.995324, 0.00193703, 0.040003, -0.00193694, -0.999198, 0.0502588, 1.74403, 0.0224828)
 bone_name = "Camera_2"
 bone_idx = 7
 
@@ -9268,7 +9274,7 @@ mesh = SubResource("ArrayMesh_chdtm")
 skin = SubResource("Skin_7yqtc")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.0965777, 0.010166, 0.995274, 0.995324, 0.000960186, -0.0965924, -0.00193767, 0.999948, -0.0100258, -0.0160816, 1.48059, 0.604368)
+transform = Transform3D(0.0965777, 0.0101661, 0.995273, 0.995324, 0.000960315, -0.0965923, -0.00193765, 0.999948, -0.0100257, -0.0160816, 1.48059, 0.604368)
 bone_name = "RifleIK"
 bone_idx = 25
 
