@@ -48,6 +48,9 @@ var regular_damage = 10
 var regular_fov = 70.0
 var ads_fov = 50.0
 
+@export var respawn_start_time = 0
+@export var respawn_timer = 3
+
 var target_recoil = Vector3()
 var target_hand_rotation = Vector3()
 var target_camera_position
@@ -211,7 +214,7 @@ func make_first_person():
 	body.visible = false
 	camera.current = true
 	player_name_label.visible = false
-	print(multiplayer.get_unique_id(),": ", "made ", name, " first person")
+	print(multiplayer.get_unique_id(), ": ", "made ", name, " first person")
 
 func die():
 	dead = true
@@ -221,12 +224,31 @@ func die():
 	change_spectate(1)
 	for c in Globulars.characters:
 		c.brodcast_death.rpc(name)
+	respawn_start_time = Time.get_unix_time_from_system()
+	await get_tree().create_timer(respawn_timer).timeout
+	respawn_timer += 3
+	dead = false
+	visible = true
+	health = max_health
+	spectate_index = -1
+	spectate_character.make_third_person()
+	spectate_character = null
+	make_first_person()
+	for c in Globulars.characters:
+		c.brodcast_respawn.rpc(name)
 
 @rpc("any_peer", "call_local")
 func brodcast_death(character_name):
 	if spectate_character and spectate_character.name == character_name:
 		change_spectate(1)
 
+@rpc("any_peer")
+func brodcast_respawn(character_name):
+	for character in Globulars.characters:
+		if character.name == character_name:
+			character.make_third_person()
+			return
+		
 func change_spectate(step):
 	if not is_multiplayer_authority():
 		return
